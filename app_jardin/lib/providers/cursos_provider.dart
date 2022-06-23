@@ -14,24 +14,7 @@ class CursosProvider {
     if (respuesta.statusCode == 200) {
       return json.decode(respuesta.body);
     } else {
-      return ["hola"];
+      return [];
     }
-  }
-
-  Future<LinkedHashMap<String, dynamic>> cursosAgregar(String rut_nino,
-      String nombre_nino, String apellido, String genero) async {
-    var uri = Uri.parse('$apiURL/cursos');
-    var respuesta = await http.post(uri,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Accept': 'application/json'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'rut_nino': rut_nino,
-          'nombre_nino': nombre_nino,
-          'apellido': apellido,
-          'genero': genero,
-        }));
-    return json.decode(respuesta.body);
   }
 }

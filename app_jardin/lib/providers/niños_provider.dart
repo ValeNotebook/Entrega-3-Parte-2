@@ -14,7 +14,7 @@ class NinosProvider {
     if (respuesta.statusCode == 200) {
       return json.decode(respuesta.body);
     } else {
-      return ["hola"];
+      return [];
     }
   }
 
