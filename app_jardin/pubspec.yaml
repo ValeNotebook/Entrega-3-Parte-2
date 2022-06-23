@@ -29,6 +29,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  curved_navigation_bar: ^1.0.3 #latest version
+  font_awesome_flutter: ^10.1.0
+  http: ^0.13.4
+  intl: ^0.17.0
 
 
   # The following adds the Cupertino Icons font to your application.
