@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{EducadoraController,EventoController,NinosController,GradosController,CursosController};
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+//Route::get('/educadoras',[EducadorasController::class,'index']);
+Route::apiResource('/educadoras',EducadoraController::class);
+Route::apiResource('/eventos',EventoController::class);
+Route::apiResource('/ninos',NinosController::class);
+Route::apiResource('/grado',GradosController::class);
+Route::apiResource('/curso',CursosController::class)->parameters(['cursos'=>'curso']);
