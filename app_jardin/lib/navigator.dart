@@ -3,6 +3,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_jardin/paleta_colores.dart';
+import 'package:app_jardin/providers/niños_provider.dart';
+import 'package:app_jardin/form_alumnos.dart';
 
 class NavigatorBar extends StatefulWidget {
   NavigatorBar({Key? key}) : super(key: key);
@@ -20,7 +22,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
   final screens = [
     //Aqui Iran Las Paginas a Navegar
     ListarAlumnos(),
-    ListarAlumnos(),
+    FormAlumnos(),
     ListarAlumnos(),
     ListarAlumnos(),
     ListarAlumnos(),

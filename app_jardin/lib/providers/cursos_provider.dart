@@ -4,11 +4,11 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class NinosProvider {
+class CursosProvider {
   final String apiURL = 'http://10.0.2.2:8000/api';
 
-  Future<List<dynamic>> getNinos() async {
-    var uri = Uri.parse('$apiURL/ninos');
+  Future<List<dynamic>> getCursos() async {
+    var uri = Uri.parse('$apiURL/cursos');
     var respuesta = await http.get(uri);
 
     if (respuesta.statusCode == 200) {
@@ -18,9 +18,9 @@ class NinosProvider {
     }
   }
 
-  Future<LinkedHashMap<String, dynamic>> ninosAgregar(String rut_nino,
+  Future<LinkedHashMap<String, dynamic>> cursosAgregar(String rut_nino,
       String nombre_nino, String apellido, String genero) async {
-    var uri = Uri.parse('$apiURL/ninos');
+    var uri = Uri.parse('$apiURL/cursos');
     var respuesta = await http.post(uri,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
