@@ -20,6 +20,10 @@ class _NavigatorBarState extends State<NavigatorBar> {
   final screens = [
     //Aqui Iran Las Paginas a Navegar
     ListarAlumnos(),
+    ListarAlumnos(),
+    ListarAlumnos(),
+    ListarAlumnos(),
+    ListarAlumnos(),
 
     //Luego en el scafolld, utilizar
     //body : screens[indexs]
