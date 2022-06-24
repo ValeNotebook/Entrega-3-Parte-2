@@ -1,4 +1,5 @@
-import 'package:app_jardin/listar_alumnos.dart';
+import 'package:app_jardin/Listar/listar_alumnos.dart';
+import 'package:app_jardin/Listar/listar_educadoras.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,7 +24,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
     //Aqui Iran Las Paginas a Navegar
     ListarAlumnos(),
     FormAlumnos(),
-    ListarAlumnos(),
+    ListarEducadoras(),
     ListarAlumnos(),
     ListarAlumnos(),
 

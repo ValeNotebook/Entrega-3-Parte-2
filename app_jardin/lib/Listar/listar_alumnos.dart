@@ -15,7 +15,25 @@ class _ListarAlumnosState extends State<ListarAlumnos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kAzul,
+      backgroundColor: kCeleste,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(40.0),
+        child: AppBar(
+          backgroundColor: kRosa,
+          title: Text(
+            'Alumnos',
+            style: TextStyle(fontWeight: FontWeight.bold, color: kMorado),
+          ),
+          actions: <Widget>[
+            IconButton(
+              color: kMorado,
+              icon: FaIcon(FontAwesomeIcons.plus),
+              tooltip: 'Agregar Alumno',
+              onPressed: () {},
+            )
+          ],
+        ),
+      ),
       body: FutureBuilder(
         future: NinosProvider().getNinos(),
         builder: (context, AsyncSnapshot snap) {
@@ -27,21 +45,28 @@ class _ListarAlumnosState extends State<ListarAlumnos> {
           return ListView.separated(
             separatorBuilder: (_, __) => Divider(
               thickness: 0.9,
-              color: kAmarillo,
+              color: kVerde,
             ),
             itemCount: snap.data.length,
             itemBuilder: (context, index) {
               var nino = snap.data[index];
               return Card(
-                color: kVerde,
+                margin: EdgeInsets.all(10.0),
+                color: kVioleta,
                 elevation: 0,
                 child: ListTile(
                   title: Text(nino['nombre_nino']),
                   subtitle: Text(nino['rut_nino']),
-                  trailing: FaIcon(
-                    FontAwesomeIcons.trash,
-                    size: 25,
-                  ),
+                  trailing: Wrap(spacing: 12, children: <Widget>[
+                    IconButton(
+                      icon: FaIcon(FontAwesomeIcons.penToSquare),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: FaIcon(FontAwesomeIcons.trashCan),
+                      onPressed: () {},
+                    ),
+                  ]),
                 ),
               );
             },

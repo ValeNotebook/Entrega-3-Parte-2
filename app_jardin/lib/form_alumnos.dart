@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app_jardin/providers/niños_provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:app_jardin/paleta_colores.dart';
 
 class FormAlumnos extends StatefulWidget {
   FormAlumnos({Key? key}) : super(key: key);
@@ -21,14 +23,13 @@ class _FormAlumnosState extends State<FormAlumnos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Productos'),
-      ),
+      backgroundColor: kVerde,
       body: Form(
         key: formKey,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListView(
+            padding: EdgeInsets.all(16),
             children: [
               TextFormField(
                 controller: rutCtrl,
