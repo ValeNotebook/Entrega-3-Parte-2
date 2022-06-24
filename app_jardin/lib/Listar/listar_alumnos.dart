@@ -69,19 +69,19 @@ class _ListarAlumnosState extends State<ListarAlumnos> {
                       IconButton(
                         icon: FaIcon(FontAwesomeIcons.trashCan),
                         onPressed: () {
-                          String rut_nino = nino['rut_nino'];
+                          String rutNino = nino['rut_nino'];
                           String nombre = nino['nombre_nino'];
                           confirmDialog(context, nombre).then((confirma) {
                             if (confirma) {
                               //borrar
                               NinosProvider()
-                                  .ninosBorrar(rut_nino)
+                                  .ninosBorrar(rutNino)
                                   .then((borradoOk) {
                                 if (borradoOk) {
                                   //pudo borrar
                                   snap.data.removeAt(index);
                                   setState(() {});
-                                  showSnackbar('Alumno $nombre borrado');
+                                  showSnackbar('Alumno $nombre Borrado');
                                 } else {
                                   //no pudo borrar
                                   showSnackbar('No se pudo borrar el Alumno');
