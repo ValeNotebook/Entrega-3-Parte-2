@@ -59,7 +59,11 @@ class _ListarAlumnosState extends State<ListarAlumnos> {
                 color: kVioleta,
                 elevation: 0,
                 child: ListTile(
-                  title: Text(nino['nombre_nino']),
+                  //Para la imagen del ni;o
+                  leading: CircleAvatar(
+                    backgroundColor: kCeleste,
+                  ),
+                  title: Text(nino['nombre_nino'] + ' ' + nino['apellido']),
                   subtitle: Text(nino['rut_nino']),
                   trailing: Wrap(
                     spacing: 12,
