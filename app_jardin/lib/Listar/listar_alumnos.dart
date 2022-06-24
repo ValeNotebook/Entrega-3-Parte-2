@@ -62,6 +62,10 @@ class _ListarAlumnosState extends State<ListarAlumnos> {
                   //Para la imagen del ni;o
                   leading: CircleAvatar(
                     backgroundColor: kCeleste,
+                    //child: ClipRRect(
+                    //child: Image.asset(' '),
+                    //borderRadius: BorderRadius.circular(50.0),
+                    //),
                   ),
                   title: Text(nino['nombre_nino'] + ' ' + nino['apellido']),
                   subtitle: Text(nino['rut_nino']),

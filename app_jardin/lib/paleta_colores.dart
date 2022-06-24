@@ -9,3 +9,4 @@ const kMorado = Color(0xff998CEB);
 const kRosa = Color(0xffF2D7D9);
 const kVioleta = Color(0xffD3CEDF);
 const kCeleste = Color(0xff9DD6DF);
+const kBurdeo = Color(0xffF7ECDE);

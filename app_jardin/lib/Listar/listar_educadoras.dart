@@ -1,3 +1,4 @@
+import 'package:app_jardin/Formularios/form_educadoras.dart';
 import 'package:app_jardin/providers/educadoras_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -30,7 +31,10 @@ class _ListarEducadorasState extends State<ListarEducadoras> {
               color: kMorado,
               icon: FaIcon(FontAwesomeIcons.plus),
               tooltip: 'Agregar Educadora',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => FormEducadoras()));
+              },
             )
           ],
         ),

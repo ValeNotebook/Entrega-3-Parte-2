@@ -3,14 +3,14 @@ import 'package:app_jardin/providers/niños_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_jardin/paleta_colores.dart';
 
-class FormAlumnos extends StatefulWidget {
-  FormAlumnos({Key? key}) : super(key: key);
+class FormEducadoras extends StatefulWidget {
+  FormEducadoras({Key? key}) : super(key: key);
 
   @override
-  State<FormAlumnos> createState() => _FormAlumnosState();
+  State<FormEducadoras> createState() => _FormEducadorasState();
 }
 
-class _FormAlumnosState extends State<FormAlumnos> {
+class _FormEducadorasState extends State<FormEducadoras> {
   final formKey = GlobalKey<FormState>();
   TextEditingController rutCtrl = TextEditingController();
   TextEditingController nombreCtrl = TextEditingController();
@@ -30,7 +30,7 @@ class _FormAlumnosState extends State<FormAlumnos> {
             automaticallyImplyLeading: false,
             backgroundColor: kRosa,
             title: Text(
-              'Formulario Ingreso Niños y Niñas',
+              'Formulario Ingreso Tias del Jardin',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: kMorado,
@@ -166,7 +166,7 @@ class _FormAlumnosState extends State<FormAlumnos> {
                         textStyle: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold)),
                     child: Text(
-                      'Agregar Niño',
+                      'Agregar Educadores',
                       style: TextStyle(color: kRosa),
                     ),
                     onPressed: () async {

@@ -17,4 +17,10 @@ class EventosProvider {
       return [];
     }
   }
+
+  Future<bool> eventossBorrar(int cod_evento) async {
+    var uri = Uri.parse('$apiURL/eventos/$cod_evento');
+    var respuesta = await http.delete(uri);
+    return respuesta.statusCode == 200;
+  }
 }

@@ -1,11 +1,12 @@
 import 'package:app_jardin/Listar/listar_alumnos.dart';
 import 'package:app_jardin/Listar/listar_educadoras.dart';
+import 'package:app_jardin/Listar/listar_eventos.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_jardin/paleta_colores.dart';
 import 'package:app_jardin/providers/niños_provider.dart';
-import 'package:app_jardin/form_alumnos.dart';
+import 'package:app_jardin/Formularios/form_alumnos.dart';
 
 class NavigatorBar extends StatefulWidget {
   NavigatorBar({Key? key}) : super(key: key);
@@ -23,9 +24,9 @@ class _NavigatorBarState extends State<NavigatorBar> {
   final screens = [
     //Aqui Iran Las Paginas a Navegar
     ListarAlumnos(),
-    FormAlumnos(),
+    ListarEventos(),
     ListarEducadoras(),
-    ListarAlumnos(),
+    ListarEventos(),
     ListarAlumnos(),
 
     //Luego en el scafolld, utilizar
@@ -36,16 +37,19 @@ class _NavigatorBarState extends State<NavigatorBar> {
   @override
   Widget build(BuildContext context) {
     final items = <Widget>[
-      FaIcon(FontAwesomeIcons.house, size: 25),
+      FaIcon(FontAwesomeIcons.childReaching, size: 25),
       // ignore: deprecated_member_use
-      FaIcon(FontAwesomeIcons.search, size: 25),
-      FaIcon(FontAwesomeIcons.heart, size: 25),
-      FaIcon(FontAwesomeIcons.gear, size: 25),
+      FaIcon(
+        FontAwesomeIcons.calendar,
+        size: 25,
+      ),
+      FaIcon(FontAwesomeIcons.addressBook, size: 25),
+      FaIcon(FontAwesomeIcons.rainbow, size: 25),
       FaIcon(FontAwesomeIcons.user, size: 25),
     ];
 
     return Scaffold(
-      backgroundColor: kAzul,
+      backgroundColor: kCeleste,
       appBar: AppBar(
         title: Text(
           'Jardin De Niños Arcoiris',
