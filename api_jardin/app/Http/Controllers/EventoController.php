@@ -60,5 +60,7 @@ class EventoController extends Controller
     public function destroy(evento $evento)
     {
         //
+        $evento->delete();
+        return 'ok';
     }
 }

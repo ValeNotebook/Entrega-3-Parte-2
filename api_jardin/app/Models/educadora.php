@@ -11,7 +11,7 @@ class educadora extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'educadoras';
-    protected $primaryKey = 'rut_educadoras';
+    protected $primaryKey = 'rut_educadora';
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = false;

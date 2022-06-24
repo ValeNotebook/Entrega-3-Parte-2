@@ -25,7 +25,12 @@ class NinosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nino = new nino();
+        $nino->rut_nino = $request-> rut_nino;
+        $nino->nombre_nino = $request->nombre_nino;
+        $nino->apellido = $request->apellido;
+        $nino->genero = $request->genero;
+        $nino->save();
     }
 
     /**

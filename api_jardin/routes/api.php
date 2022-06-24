@@ -24,5 +24,4 @@ use App\Http\Controllers\{EducadoraController,EventoController,NinosController,G
 Route::apiResource('/educadoras',EducadoraController::class);
 Route::apiResource('/eventos',EventoController::class);
 Route::apiResource('/ninos',NinosController::class);
-Route::apiResource('/grado',GradosController::class);
 Route::apiResource('/curso',CursosController::class)->parameters(['cursos'=>'curso']);

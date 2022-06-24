@@ -59,6 +59,7 @@ class CursosController extends Controller
      */
     public function destroy(curso $curso)
     {
-        //
+        $curso->delete();
+        return 'ok';
     }
 }
