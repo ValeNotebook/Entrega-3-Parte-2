@@ -30,7 +30,7 @@ class _FormAlumnosState extends State<FormAlumnos> {
             automaticallyImplyLeading: false,
             backgroundColor: kRosa,
             title: Text(
-              'Formulario Ingreso Ninos',
+              'Formulario Ingreso Niños y Niñas',
               style: TextStyle(fontWeight: FontWeight.bold, color: kMorado),
             ),
             leading: IconButton(

@@ -22,14 +22,14 @@ class _ListarAlumnosState extends State<ListarAlumnos> {
         child: AppBar(
           backgroundColor: kRosa,
           title: Text(
-            'Alumnos',
+            'Listado Niños y Niñas Del Jardin',
             style: TextStyle(fontWeight: FontWeight.bold, color: kMorado),
           ),
           actions: <Widget>[
             IconButton(
               color: kMorado,
               icon: FaIcon(FontAwesomeIcons.plus),
-              tooltip: 'Agregar Alumno',
+              tooltip: 'Agregar Niños',
               onPressed: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => FormAlumnos()));
