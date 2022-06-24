@@ -17,7 +17,8 @@ class CreateGradosTable extends Migration
             $table->unsignedBigInteger('id_grado')->primary();
             $table->string('nombre_grado',20);
             $table->string('descripcion',30);
-            
+            $table->softDeletes();
+
 
         });
     }

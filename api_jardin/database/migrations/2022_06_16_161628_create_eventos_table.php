@@ -19,8 +19,9 @@ class CreateEventosTable extends Migration
             $table->string('tia');
             //$table->unsignedBigInteger('grado');
             $table->string('descripcion');
-            
-        
+            $table->softDeletes();
+
+
            // $table->foreign('grado')->references('id_grado')->on('grados');
             $table->foreign('tia')->references('rut_educadora')->on('educadoras');
             $table->foreign('nino')->references('rut_nino')->on('ninos');

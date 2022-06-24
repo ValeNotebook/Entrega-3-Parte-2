@@ -18,6 +18,7 @@ class CreateNiñosTable extends Migration
             $table->string('nombre_nino',20);
             $table->string('apellido',20);
             $table->string('genero',1);
+            $table->softDeletes();
            // $table->string('fecha_nacimiento');
         });
     }

@@ -60,5 +60,7 @@ class NinosController extends Controller
     public function destroy(nino $nino)
     {
         //
+        $nino->delete;
+
     }
 }

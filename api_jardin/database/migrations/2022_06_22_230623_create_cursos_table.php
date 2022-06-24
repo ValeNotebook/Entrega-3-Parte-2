@@ -21,6 +21,7 @@ class CreateCursosTable extends Migration
             $table->foreign('grado')->references('id_grado')->on('grados');
             $table->foreign('tia')->references('rut_educadora')->on('educadoras');
             $table->foreign('nino')->references('rut_nino')->on('ninos');
+            $table->softDeletes();
         });
     }
 
