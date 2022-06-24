@@ -34,4 +34,10 @@ class NinosProvider {
         }));
     return json.decode(respuesta.body);
   }
+
+  Future<bool> ninosBorrar(String rut_nino) async {
+    var uri = Uri.parse('$apiURL/ninos/$rut_nino');
+    var respuesta = await http.delete(uri);
+    return respuesta.statusCode == 200;
+  }
 }

@@ -26,6 +26,8 @@ class _ListarAlumnosState extends State<ListarAlumnos> {
           ),
           actions: <Widget>[
             IconButton(
+              hoverColor: kVerde,
+              focusColor: kVerde,
               color: kMorado,
               icon: FaIcon(FontAwesomeIcons.plus),
               tooltip: 'Agregar Alumno',
@@ -57,22 +59,79 @@ class _ListarAlumnosState extends State<ListarAlumnos> {
                 child: ListTile(
                   title: Text(nino['nombre_nino']),
                   subtitle: Text(nino['rut_nino']),
-                  trailing: Wrap(spacing: 12, children: <Widget>[
-                    IconButton(
-                      icon: FaIcon(FontAwesomeIcons.penToSquare),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: FaIcon(FontAwesomeIcons.trashCan),
-                      onPressed: () {},
-                    ),
-                  ]),
+                  trailing: Wrap(
+                    spacing: 12,
+                    children: <Widget>[
+                      IconButton(
+                        icon: FaIcon(FontAwesomeIcons.penToSquare),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: FaIcon(FontAwesomeIcons.trashCan),
+                        onPressed: () {
+                          String rut_nino = nino['rut_nino'];
+                          String nombre = nino['nombre_nino'];
+                          confirmDialog(context, nombre).then((confirma) {
+                            if (confirma) {
+                              //borrar
+                              NinosProvider()
+                                  .ninosBorrar(rut_nino)
+                                  .then((borradoOk) {
+                                if (borradoOk) {
+                                  //pudo borrar
+                                  snap.data.removeAt(index);
+                                  setState(() {});
+                                  showSnackbar('Alumno $nombre borrado');
+                                } else {
+                                  //no pudo borrar
+                                  showSnackbar('No se pudo borrar el Alumno');
+                                }
+                              });
+                            }
+                            ;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
           );
         },
       ),
+    );
+  }
+
+  void showSnackbar(String mensaje) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(mensaje),
+      ),
+    );
+  }
+
+  Future<dynamic> confirmDialog(BuildContext context, String nino) {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Confirmar borrado'),
+          content: Text('¿Borrar el Alumno $nino?'),
+          actions: [
+            TextButton(
+              child: Text('CANCELAR'),
+              onPressed: () => Navigator.pop(context, false),
+            ),
+            ElevatedButton(
+              child: Text('ACEPTAR'),
+              onPressed: () => Navigator.pop(context, true),
+            ),
+          ],
+        );
+      },
     );
   }
 }
