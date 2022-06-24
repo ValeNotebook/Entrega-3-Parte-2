@@ -60,5 +60,7 @@ class EducadoraController extends Controller
     public function destroy(educadora $educadora)
     {
         //
+        $educadora->delete();
+        return 'ok';
     }
 }
