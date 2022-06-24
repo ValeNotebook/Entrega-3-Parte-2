@@ -1,3 +1,4 @@
+import 'package:app_jardin/Formularios/form_alumnos.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:app_jardin/providers/niños_provider.dart';
@@ -26,12 +27,13 @@ class _ListarAlumnosState extends State<ListarAlumnos> {
           ),
           actions: <Widget>[
             IconButton(
-              hoverColor: kVerde,
-              focusColor: kVerde,
               color: kMorado,
               icon: FaIcon(FontAwesomeIcons.plus),
               tooltip: 'Agregar Alumno',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => FormAlumnos()));
+              },
             )
           ],
         ),
