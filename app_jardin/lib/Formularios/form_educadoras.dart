@@ -173,13 +173,6 @@ class _FormEducadorasState extends State<FormEducadoras> {
                       //int stock = int.tryParse(stockCtrl.text) ?? 0;
                       //int precio = int.tryParse(precioCtrl.text) ?? 0;
 
-                      var respuesta = await NinosProvider().ninosAgregar(
-                        rutCtrl.text.trim(),
-                        nombreCtrl.text.trim(),
-                        apellidoCtrl.text.trim(),
-                        generoCtrl.text.trim(),
-                      );
-
                       setState(() {});
                       return;
                     }),

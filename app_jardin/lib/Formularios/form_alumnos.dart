@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app_jardin/providers/niños_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_jardin/paleta_colores.dart';
+import 'package:image_picker/image_picker.dart';
 
 class FormAlumnos extends StatefulWidget {
   FormAlumnos({Key? key}) : super(key: key);
@@ -12,10 +13,21 @@ class FormAlumnos extends StatefulWidget {
 
 class _FormAlumnosState extends State<FormAlumnos> {
   final formKey = GlobalKey<FormState>();
-  TextEditingController rutCtrl = TextEditingController();
-  TextEditingController nombreCtrl = TextEditingController();
-  TextEditingController apellidoCtrl = TextEditingController();
-  TextEditingController generoCtrl = TextEditingController();
+
+  TextEditingController rutController = TextEditingController();
+  TextEditingController nombreController = TextEditingController();
+  TextEditingController apellidoController = TextEditingController();
+  TextEditingController generoController = TextEditingController();
+
+  String label1 = 'Rut';
+  String label2 = 'Nombre';
+  String label3 = 'Apellido';
+  String label4 = 'Genero';
+
+  String rutValue = '';
+  String nombreValue = '';
+  String apellidoValue = '';
+  String generoValue = '';
 
   String errCodigo = '';
   String errNombre = '';
@@ -56,20 +68,8 @@ class _FormAlumnosState extends State<FormAlumnos> {
               TextFormField(
                 cursorColor: kMorado,
                 keyboardType: TextInputType.number,
-                controller: rutCtrl,
-                decoration: InputDecoration(
-                  filled: true, //<-- SEE HERE
-                  fillColor: kCeleste,
-                  labelText: 'Rut',
-                  enabledBorder: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5.0),
-                    borderSide: BorderSide(color: kMorado),
-                  ),
-                  focusedBorder: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5.0),
-                    borderSide: BorderSide(color: kMorado),
-                  ),
-                ),
+                controller: rutController,
+                decoration: decorationInput(label1),
                 style: TextStyle(
                   fontSize: 15,
                   color: kMorado,
@@ -84,20 +84,8 @@ class _FormAlumnosState extends State<FormAlumnos> {
               ),
               TextFormField(
                 cursorColor: kMorado,
-                controller: nombreCtrl,
-                decoration: InputDecoration(
-                  filled: true, //<-- SEE HERE
-                  fillColor: kCeleste,
-                  labelText: 'Nombre',
-                  enabledBorder: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5.0),
-                    borderSide: BorderSide(color: kMorado),
-                  ),
-                  focusedBorder: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5.0),
-                    borderSide: BorderSide(color: kMorado),
-                  ),
-                ),
+                controller: nombreController,
+                decoration: decorationInput(label2),
                 style: TextStyle(
                   fontSize: 15,
                   color: kMorado,
@@ -112,20 +100,8 @@ class _FormAlumnosState extends State<FormAlumnos> {
               ),
               TextFormField(
                 cursorColor: kMorado,
-                controller: apellidoCtrl,
-                decoration: InputDecoration(
-                  filled: true, //<-- SEE HERE
-                  fillColor: kCeleste,
-                  labelText: 'Apellido',
-                  enabledBorder: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5.0),
-                    borderSide: BorderSide(color: kMorado),
-                  ),
-                  focusedBorder: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5.0),
-                    borderSide: BorderSide(color: kMorado),
-                  ),
-                ),
+                controller: apellidoController,
+                decoration: decorationInput(label3),
                 style: TextStyle(fontSize: 15),
               ),
               Container(
@@ -137,20 +113,8 @@ class _FormAlumnosState extends State<FormAlumnos> {
               ),
               TextFormField(
                 cursorColor: kMorado,
-                controller: generoCtrl,
-                decoration: InputDecoration(
-                  filled: true, //<-- SEE HERE
-                  fillColor: kCeleste,
-                  labelText: 'Genero',
-                  enabledBorder: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5.0),
-                    borderSide: BorderSide(color: kMorado),
-                  ),
-                  focusedBorder: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5.0),
-                    borderSide: BorderSide(color: kMorado),
-                  ),
-                ),
+                controller: generoController,
+                decoration: decorationInput(label4),
                 style: TextStyle(
                   fontSize: 15,
                   color: kMorado,
@@ -170,18 +134,28 @@ class _FormAlumnosState extends State<FormAlumnos> {
                       style: TextStyle(color: kRosa),
                     ),
                     onPressed: () async {
+                      String rut = rutController.text.toString();
+                      String nombre = nombreController.text;
+                      String apellido = apellidoController.text;
+                      String genero = generoController.text;
+
+                      var res = await NinosProvider()
+                          .ninosAgregar(rut, nombre, apellido, genero);
+                      if (res.isEmpty) {
+                        print(res);
+                        //Aqui un Snackbar
+                      } else {
+                        Navigator.pop(context);
+                      }
                       //int stock = int.tryParse(stockCtrl.text) ?? 0;
                       //int precio = int.tryParse(precioCtrl.text) ?? 0;
 
-                      var respuesta = await NinosProvider().ninosAgregar(
-                        rutCtrl.text.trim(),
-                        nombreCtrl.text.trim(),
-                        apellidoCtrl.text.trim(),
-                        generoCtrl.text.trim(),
-                      );
-
-                      setState(() {});
-                      return;
+                      //var respuesta = await NinosProvider().ninosAgregar(
+                      //rutValue.trim(),
+                      //nombreValue.trim(),
+                      //apellidoValue.trim(),
+                      //generoValue.trim(),
+                      //);
                     }),
               ),
             ],
@@ -189,6 +163,24 @@ class _FormAlumnosState extends State<FormAlumnos> {
         ),
       ),
       //Navigator.pop(context);
+    );
+  }
+
+//Decoracion para los input
+
+  InputDecoration decorationInput(String label) {
+    return InputDecoration(
+      filled: true, //<-- SEE HERE
+      fillColor: kCeleste,
+      labelText: label,
+      enabledBorder: new OutlineInputBorder(
+        borderRadius: new BorderRadius.circular(5.0),
+        borderSide: BorderSide(color: kMorado),
+      ),
+      focusedBorder: new OutlineInputBorder(
+        borderRadius: new BorderRadius.circular(5.0),
+        borderSide: BorderSide(color: kMorado),
+      ),
     );
   }
 }

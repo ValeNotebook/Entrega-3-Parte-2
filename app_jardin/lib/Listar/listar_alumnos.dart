@@ -31,8 +31,10 @@ class _ListarAlumnosState extends State<ListarAlumnos> {
               icon: FaIcon(FontAwesomeIcons.plus),
               tooltip: 'Agregar Niños',
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => FormAlumnos()));
+                Navigator.of(context)
+                    .push(
+                        MaterialPageRoute(builder: (context) => FormAlumnos()))
+                    .then((_) => setState(() {}));
               },
             )
           ],
