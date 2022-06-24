@@ -144,7 +144,9 @@ class _FormAlumnosState extends State<FormAlumnos> {
                       if (res.isEmpty) {
                         print(res);
                         //Aqui un Snackbar
+                        showSnackbar(' $nombre No Se Ha Podido Agregar');
                       } else {
+                        showSnackbar(' $nombre Agregad@');
                         Navigator.pop(context);
                       }
                       //int stock = int.tryParse(stockCtrl.text) ?? 0;
@@ -180,6 +182,15 @@ class _FormAlumnosState extends State<FormAlumnos> {
       focusedBorder: new OutlineInputBorder(
         borderRadius: new BorderRadius.circular(5.0),
         borderSide: BorderSide(color: kMorado),
+      ),
+    );
+  }
+
+  void showSnackbar(String mensaje) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(mensaje),
       ),
     );
   }
