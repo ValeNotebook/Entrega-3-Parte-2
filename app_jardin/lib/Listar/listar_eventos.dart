@@ -22,7 +22,7 @@ class _ListarEventosState extends State<ListarEventos> {
         child: AppBar(
           backgroundColor: kRosa,
           title: Text(
-            'Eventos',
+            'Eventos Y Sucesos',
             style: TextStyle(fontWeight: FontWeight.bold, color: kMorado),
           ),
           actions: <Widget>[
@@ -50,14 +50,14 @@ class _ListarEventosState extends State<ListarEventos> {
             ),
             itemCount: snap.data.length,
             itemBuilder: (context, index) {
-              var educadora = snap.data[index];
+              var evento = snap.data[index];
               return Card(
                 margin: EdgeInsets.all(10.0),
                 color: kVioleta,
                 elevation: 0,
                 child: ListTile(
-                  title: Text((educadora['cod_evento']).toString()),
-                  subtitle: Text(educadora['tia']),
+                  title: Text((evento['cod_evento']).toString()),
+                  subtitle: Text(evento['tia']),
                   trailing: Wrap(
                     spacing: 12,
                     children: <Widget>[
@@ -68,7 +68,7 @@ class _ListarEventosState extends State<ListarEventos> {
                       IconButton(
                         icon: FaIcon(FontAwesomeIcons.trashCan),
                         onPressed: () {
-                          int codigo = educadora['cod_evento'];
+                          int codigo = evento['cod_evento'];
                           String cod_string = codigo.toString();
                           confirmDialog(context, codigo, cod_string)
                               .then((confirma) {

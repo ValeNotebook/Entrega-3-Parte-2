@@ -17,4 +17,10 @@ class CursosProvider {
       return [];
     }
   }
+
+  Future<bool> cursosBorrar(String cod_curso) async {
+    var uri = Uri.parse('$apiURL/cursos/$cod_curso');
+    var respuesta = await http.delete(uri);
+    return respuesta.statusCode == 200;
+  }
 }
