@@ -1,6 +1,6 @@
 import 'package:app_jardin/providers/cursos_provider.dart';
 import 'package:app_jardin/providers/eventos_provider.dart';
-import 'package:app_jardin/providers/cursos_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:app_jardin/providers/niños_provider.dart';
@@ -24,7 +24,7 @@ class _ListarNivelesState extends State<ListarNiveles> {
         child: AppBar(
           backgroundColor: kRosa,
           title: Text(
-            'Eventos',
+            'Listado y Gestion De Niveles',
             style: TextStyle(fontWeight: FontWeight.bold, color: kMorado),
           ),
           actions: <Widget>[
@@ -38,7 +38,7 @@ class _ListarNivelesState extends State<ListarNiveles> {
         ),
       ),
       body: FutureBuilder(
-        future: EventosProvider().getEventos(),
+        future: CursosProvider().getCursos(),
         builder: (context, AsyncSnapshot snap) {
           if (!snap.hasData) {
             return Center(
@@ -58,8 +58,8 @@ class _ListarNivelesState extends State<ListarNiveles> {
                 color: kVioleta,
                 elevation: 0,
                 child: ListTile(
-                  title: Text((nivel['cod_evento']).toString()),
-                  subtitle: Text(nivel['tia']),
+                  title: Text((nivel['cod_curso']).toString()),
+                  subtitle: Text(nivel['nombre_grado']),
                   trailing: Wrap(
                     spacing: 12,
                     children: <Widget>[

@@ -1,6 +1,7 @@
 import 'package:app_jardin/Listar/listar_alumnos.dart';
 import 'package:app_jardin/Listar/listar_educadoras.dart';
 import 'package:app_jardin/Listar/listar_eventos.dart';
+import 'package:app_jardin/Listar/listar_niveles.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,7 +27,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
     ListarAlumnos(),
     ListarEventos(),
     ListarEducadoras(),
-    ListarEventos(),
+    ListarNiveles(),
     ListarAlumnos(),
 
     //Luego en el scafolld, utilizar

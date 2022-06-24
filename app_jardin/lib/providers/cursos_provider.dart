@@ -8,7 +8,7 @@ class CursosProvider {
   final String apiURL = 'http://10.0.2.2:8000/api';
 
   Future<List<dynamic>> getCursos() async {
-    var uri = Uri.parse('$apiURL/cursos');
+    var uri = Uri.parse('$apiURL/curso');
     var respuesta = await http.get(uri);
 
     if (respuesta.statusCode == 200) {
@@ -19,7 +19,7 @@ class CursosProvider {
   }
 
   Future<bool> cursosBorrar(String cod_curso) async {
-    var uri = Uri.parse('$apiURL/cursos/$cod_curso');
+    var uri = Uri.parse('$apiURL/curso/$cod_curso');
     var respuesta = await http.delete(uri);
     return respuesta.statusCode == 200;
   }
