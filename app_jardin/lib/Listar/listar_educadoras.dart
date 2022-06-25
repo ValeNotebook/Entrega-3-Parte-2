@@ -32,8 +32,11 @@ class _ListarEducadorasState extends State<ListarEducadoras> {
               icon: FaIcon(FontAwesomeIcons.plus),
               tooltip: 'Agregar Educadora',
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => FormEducadoras()));
+                //Push y setState luego de agregar Educadora
+                Navigator.of(context)
+                    .push(MaterialPageRoute(
+                        builder: (context) => FormEducadoras()))
+                    .then((_) => setState(() {}));
               },
             )
           ],
@@ -72,13 +75,13 @@ class _ListarEducadorasState extends State<ListarEducadoras> {
                       IconButton(
                         icon: FaIcon(FontAwesomeIcons.trashCan),
                         onPressed: () {
-                          String rutNino = educadora['rut_educadora'];
-                          String nombre = educadora['nombre_educadora'];
+                          String rutEducadora = educadora['rut_educadora'];
+                          String nombre = educadora['nombre_tia'];
                           confirmDialog(context, nombre).then((confirma) {
                             if (confirma) {
                               //borrar
-                              NinosProvider()
-                                  .ninosBorrar(rutNino)
+                              EducadorasProvider()
+                                  .educadorasBorrar(rutEducadora)
                                   .then((borradoOk) {
                                 if (borradoOk) {
                                   //pudo borrar
@@ -116,14 +119,14 @@ class _ListarEducadorasState extends State<ListarEducadoras> {
     );
   }
 
-  Future<dynamic> confirmDialog(BuildContext context, String nino) {
+  Future<dynamic> confirmDialog(BuildContext context, String educadora) {
     return showDialog(
       barrierDismissible: false,
       context: context,
       builder: (context) {
         return AlertDialog(
           title: Text('Confirmar borrado'),
-          content: Text('¿Borrar el Alumno $nino?'),
+          content: Text('¿Borrar la Educadora $educadora?'),
           actions: [
             TextButton(
               child: Text('CANCELAR'),

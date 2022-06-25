@@ -1,3 +1,4 @@
+import 'package:app_jardin/Formularios/form_eventos.dart';
 import 'package:app_jardin/providers/eventos_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -29,8 +30,14 @@ class _ListarEventosState extends State<ListarEventos> {
             IconButton(
               color: kMorado,
               icon: FaIcon(FontAwesomeIcons.plus),
-              tooltip: 'Agregar Evento',
-              onPressed: () {},
+              tooltip: 'Formulario de Eventos y Sucesos',
+              onPressed: () {
+                //Push y setState luego de agregar Evento
+                Navigator.of(context)
+                    .push(
+                        MaterialPageRoute(builder: (context) => FormEventos()))
+                    .then((_) => setState(() {}));
+              },
             )
           ],
         ),

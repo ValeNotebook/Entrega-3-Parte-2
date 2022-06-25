@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:app_jardin/providers/niños_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_jardin/paleta_colores.dart';
-import 'package:image_picker/image_picker.dart';
 
 class FormAlumnos extends StatefulWidget {
   FormAlumnos({Key? key}) : super(key: key);
@@ -14,23 +13,19 @@ class FormAlumnos extends StatefulWidget {
 class _FormAlumnosState extends State<FormAlumnos> {
   final formKey = GlobalKey<FormState>();
 
-  TextEditingController rutController = TextEditingController();
-  TextEditingController nombreController = TextEditingController();
-  TextEditingController apellidoController = TextEditingController();
-  TextEditingController generoController = TextEditingController();
+  TextEditingController codigoController = TextEditingController();
+  TextEditingController gradoController = TextEditingController();
+  TextEditingController ninoController = TextEditingController();
+  TextEditingController tiaController = TextEditingController();
 
   String label1 = 'Rut';
   String label2 = 'Nombre';
   String label3 = 'Apellido';
-  String label4 = 'Genero';
 
   String rutValue = '';
   String nombreValue = '';
   String apellidoValue = '';
   String generoValue = '';
-
-  String errCodigo = '';
-  String errNombre = '';
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +63,7 @@ class _FormAlumnosState extends State<FormAlumnos> {
               TextFormField(
                 cursorColor: kMorado,
                 keyboardType: TextInputType.number,
-                controller: rutController,
+                controller: tiaController,
                 decoration: decorationInput(label1),
                 style: TextStyle(
                   fontSize: 15,
@@ -78,7 +73,7 @@ class _FormAlumnosState extends State<FormAlumnos> {
               Divider(),
               TextFormField(
                 cursorColor: kMorado,
-                controller: nombreController,
+                controller: tiaController,
                 decoration: decorationInput(label2),
                 style: TextStyle(
                   fontSize: 15,
@@ -88,19 +83,9 @@ class _FormAlumnosState extends State<FormAlumnos> {
               Divider(),
               TextFormField(
                 cursorColor: kMorado,
-                controller: apellidoController,
+                controller: tiaController,
                 decoration: decorationInput(label3),
                 style: TextStyle(fontSize: 15),
-              ),
-              Divider(),
-              TextFormField(
-                cursorColor: kMorado,
-                controller: generoController,
-                decoration: decorationInput(label4),
-                style: TextStyle(
-                  fontSize: 15,
-                  color: kMorado,
-                ),
               ),
               Divider(),
               Container(
@@ -112,25 +97,25 @@ class _FormAlumnosState extends State<FormAlumnos> {
                         textStyle: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold)),
                     child: Text(
-                      'Agregar Niño',
+                      'Agregar Nivel',
                       style: TextStyle(color: kRosa),
                     ),
                     onPressed: () async {
-                      String rut = rutController.text.toString();
-                      String nombre = nombreController.text;
-                      String apellido = apellidoController.text;
-                      String genero = generoController.text;
+                      //String rut = rutController.text.toString();
+                      //String nombre = nombreController.text;
+                      //String apellido = apellidoController.text;
+                      //String genero = generoController.text;
 
-                      var res = await NinosProvider()
-                          .ninosAgregar(rut, nombre, apellido, genero);
-                      if (res.isEmpty) {
-                        print(res);
-                        //Aqui un Snackbar
-                        showSnackbar(' $nombre No Se Ha Podido Agregar');
-                      } else {
-                        showSnackbar(' $nombre Agregad@');
-                        Navigator.pop(context);
-                      }
+                      //var res = await NinosProvider()
+                      //.ninosAgregar(rut, nombre, apellido, genero);
+                      //if (res.isEmpty) {
+                      //print(res);
+                      //Aqui un Snackbar
+                      //showSnackbar(' $nombre No Se Ha Podido Agregar');
+                      //} else {
+                      //showSnackbar(' $nombre Agregad@');
+                      //Navigator.pop(context);
+                      //}
                       //int stock = int.tryParse(stockCtrl.text) ?? 0;
                       //int precio = int.tryParse(precioCtrl.text) ?? 0;
 
