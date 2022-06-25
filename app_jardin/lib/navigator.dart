@@ -28,6 +28,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
     ListarEventos(),
     ListarEducadoras(),
     ListarNiveles(),
+    ListarNiveles(),
 
     //Luego en el scafolld, utilizar
     //body : screens[indexs]

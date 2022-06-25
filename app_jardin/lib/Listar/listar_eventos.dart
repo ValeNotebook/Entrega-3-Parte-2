@@ -57,10 +57,6 @@ class _ListarEventosState extends State<ListarEventos> {
                     spacing: 12,
                     children: <Widget>[
                       IconButton(
-                        icon: FaIcon(FontAwesomeIcons.penToSquare),
-                        onPressed: () {},
-                      ),
-                      IconButton(
                         icon: FaIcon(FontAwesomeIcons.trashCan),
                         onPressed: () {
                           int codigo = evento['cod_evento'];
