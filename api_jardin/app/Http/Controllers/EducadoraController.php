@@ -28,6 +28,18 @@ class EducadoraController extends Controller
     public function store(Request $request)
     {
         //
+        $educadora = new educadora();
+        $educadora->rut_educadora = $request-> rut_educadora;
+        $educadora->nombre_tia = $request->nombre_tia;
+        $educadora->apellido = $request->apellido;
+
+        if($educadora->save()){
+            return $educadora;
+
+        }else{
+            return [];
+
+        }
     }
 
     /**
