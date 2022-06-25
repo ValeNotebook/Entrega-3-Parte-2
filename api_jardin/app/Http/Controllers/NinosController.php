@@ -30,7 +30,15 @@ class NinosController extends Controller
         $nino->nombre_nino = $request->nombre_nino;
         $nino->apellido = $request->apellido;
         $nino->genero = $request->genero;
-        $nino->save();
+        if($nino->save()){
+            return $nino;
+
+        }else{
+            return [];
+
+        }
+
+
     }
 
     /**

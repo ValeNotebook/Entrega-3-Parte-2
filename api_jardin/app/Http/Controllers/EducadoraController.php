@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\educadora;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,7 @@ class EducadoraController extends Controller
     {
         return Educadora::all();
     }
+
 
     /**
      * Store a newly created resource in storage.
