@@ -20,6 +20,19 @@ class EducadorasProvider {
     }
   }
 
+  //Get Una Educadoras
+
+  Future<List<dynamic>> getEducadoraById(id) async {
+    var uri = Uri.parse('$apiURL/educadoras/$id');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return [];
+    }
+  }
+
   Future<LinkedHashMap<String, dynamic>> educadoraAgregar(
       String rut_educadora, String nombre_tia, String apellido) async {
     var uri = Uri.parse('$apiURL/educadoras');

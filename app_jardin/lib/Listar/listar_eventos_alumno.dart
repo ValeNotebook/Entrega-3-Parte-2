@@ -3,18 +3,23 @@ import 'package:app_jardin/providers/eventos_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:app_jardin/providers/niños_provider.dart';
-import 'package:app_jardin/providers/educadoras_provider.dart';
+import 'package:app_jardin/providers/eventos_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_jardin/paleta_colores.dart';
 
-class ListarEventos extends StatefulWidget {
-  ListarEventos({Key? key}) : super(key: key);
-
+class SecondPage extends StatefulWidget {
+  String something;
+  SecondPage(this.something);
   @override
-  State<ListarEventos> createState() => _ListarEventosState();
+  State<StatefulWidget> createState() {
+    return SecondPageState(this.something);
+  }
 }
 
-class _ListarEventosState extends State<ListarEventos> {
+class SecondPageState extends State<SecondPage> {
+  String something;
+  SecondPageState(this.something);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,13 +29,27 @@ class _ListarEventosState extends State<ListarEventos> {
         child: AppBar(
           backgroundColor: kRosa,
           title: Text(
-            'Eventos Y Sucesos Del Jardin',
+            'Eventos De $something',
             style: TextStyle(fontWeight: FontWeight.bold, color: kMorado),
           ),
+          actions: <Widget>[
+            IconButton(
+              color: kMorado,
+              icon: FaIcon(FontAwesomeIcons.plus),
+              tooltip: 'Formulario de Eventos y Sucesos',
+              onPressed: () {
+                //Push y setState luego de agregar Evento
+                Navigator.of(context)
+                    .push(
+                        MaterialPageRoute(builder: (context) => FormEventos()))
+                    .then((_) => setState(() {}));
+              },
+            )
+          ],
         ),
       ),
       body: FutureBuilder(
-        future: EventosProvider().getEventos(),
+        future: EventosProvider().getEventoByNino(this.something),
         builder: (context, AsyncSnapshot snap) {
           if (!snap.hasData) {
             return Center(
@@ -45,6 +64,8 @@ class _ListarEventosState extends State<ListarEventos> {
             itemCount: snap.data.length,
             itemBuilder: (context, index) {
               var evento = snap.data[index];
+              var datosCompletos =
+                  EventosProvider().getEventoByNino(evento['cod_evento']);
 
               return Card(
                 margin: EdgeInsets.all(10.0),

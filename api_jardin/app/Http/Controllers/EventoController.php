@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\evento;
+use App\Models\educadora;
+use App\Models\nino;
 use Illuminate\Http\Request;
 
 class EventoController extends Controller
@@ -26,6 +28,26 @@ class EventoController extends Controller
     public function store(Request $request)
     {
         //
+        //
+        $evento = new evento();
+        $evento->nino = $request-> nino;
+        $evento->tia = $request->tia;
+        $evento->descripcion = $request->descripcion;
+
+        if($evento->save()){
+            return $evento;
+
+        }else{
+            return [];
+
+        }
+    }
+
+    public function getEventoByNinoId(Request $request){
+        $input = $request->all();
+        $filtro = $input["filtro"];
+        $evento = evento::where("nino",$filtro)->get();
+        return $evento;
     }
 
     /**

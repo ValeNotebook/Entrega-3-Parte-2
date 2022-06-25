@@ -1,3 +1,4 @@
+import 'package:app_jardin/providers/eventos_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:app_jardin/providers/niños_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,14 +14,14 @@ class FormEventos extends StatefulWidget {
 class _FormEventosState extends State<FormEventos> {
   final formKey = GlobalKey<FormState>();
 
-  TextEditingController codigoController = TextEditingController();
-  TextEditingController gradoController = TextEditingController();
-  TextEditingController ninoController = TextEditingController();
+  //Falta validar que existen los alumnos, y traer los datos
   TextEditingController tiaController = TextEditingController();
+  TextEditingController ninoController = TextEditingController();
+  TextEditingController descripcionController = TextEditingController();
 
-  String label1 = 'Rut';
-  String label2 = 'Nombre';
-  String label3 = 'Apellido';
+  String label2 = 'Nino';
+  String label3 = 'Tia';
+  String label4 = 'Descripcion';
 
   String rutValue = '';
   String nombreValue = '';
@@ -37,7 +38,7 @@ class _FormEventosState extends State<FormEventos> {
             automaticallyImplyLeading: false,
             backgroundColor: kRosa,
             title: Text(
-              'Formulario Ingreso Niños y Niñas',
+              'Formulario Ingreso Eventos',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: kMorado,
@@ -63,17 +64,7 @@ class _FormEventosState extends State<FormEventos> {
               TextFormField(
                 cursorColor: kMorado,
                 keyboardType: TextInputType.number,
-                controller: tiaController,
-                decoration: decorationInput(label1),
-                style: TextStyle(
-                  fontSize: 15,
-                  color: kMorado,
-                ),
-              ),
-              Divider(),
-              TextFormField(
-                cursorColor: kMorado,
-                controller: tiaController,
+                controller: ninoController,
                 decoration: decorationInput(label2),
                 style: TextStyle(
                   fontSize: 15,
@@ -85,6 +76,16 @@ class _FormEventosState extends State<FormEventos> {
                 cursorColor: kMorado,
                 controller: tiaController,
                 decoration: decorationInput(label3),
+                style: TextStyle(
+                  fontSize: 15,
+                  color: kMorado,
+                ),
+              ),
+              Divider(),
+              TextFormField(
+                cursorColor: kMorado,
+                controller: descripcionController,
+                decoration: decorationInput(label4),
                 style: TextStyle(fontSize: 15),
               ),
               Divider(),
@@ -101,30 +102,20 @@ class _FormEventosState extends State<FormEventos> {
                       style: TextStyle(color: kRosa),
                     ),
                     onPressed: () async {
-                      //String rut = rutController.text.toString();
-                      //String nombre = nombreController.text;
-                      //String apellido = apellidoController.text;
-                      //String genero = generoController.text;
+                      String nino = ninoController.text.toString();
+                      String tia = tiaController.text.toString();
+                      String descripcion = descripcionController.text;
 
-                      //var res = await NinosProvider()
-                      //.ninosAgregar(rut, nombre, apellido, genero);
-                      //if (res.isEmpty) {
-                      //print(res);
-                      //Aqui un Snackbar
-                      //showSnackbar(' $nombre No Se Ha Podido Agregar');
-                      //} else {
-                      //showSnackbar(' $nombre Agregad@');
-                      //Navigator.pop(context);
-                      //}
-                      //int stock = int.tryParse(stockCtrl.text) ?? 0;
-                      //int precio = int.tryParse(precioCtrl.text) ?? 0;
-
-                      //var respuesta = await NinosProvider().ninosAgregar(
-                      //rutValue.trim(),
-                      //nombreValue.trim(),
-                      //apellidoValue.trim(),
-                      //generoValue.trim(),
-                      //);
+                      var res = await EventosProvider()
+                          .eventosAgregar(nino, tia, descripcion);
+                      if (res.isEmpty) {
+                        print(res);
+                        //Aqui un Snackbar
+                        showSnackbar(' $descripcion No Se Ha Podido Agregar');
+                      } else {
+                        showSnackbar(' $descripcion Agregad@');
+                        Navigator.pop(context);
+                      }
                     }),
               ),
             ],
@@ -159,6 +150,29 @@ class _FormEventosState extends State<FormEventos> {
         duration: Duration(seconds: 2),
         content: Text(mensaje),
       ),
+    );
+  }
+
+  Future<dynamic> confirmDialog(BuildContext context, String evento) {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Confirmar borrado'),
+          content: Text('¿Borrar el Evento $evento?'),
+          actions: [
+            TextButton(
+              child: Text('CANCELAR'),
+              onPressed: () => Navigator.pop(context, false),
+            ),
+            ElevatedButton(
+              child: Text('ACEPTAR'),
+              onPressed: () => Navigator.pop(context, true),
+            ),
+          ],
+        );
+      },
     );
   }
 }

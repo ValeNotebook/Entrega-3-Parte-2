@@ -18,6 +18,17 @@ class EducadoraController extends Controller
         return Educadora::all();
     }
 
+    //Buscar una educadora por ID
+
+    public function verEducadora($id){
+
+        //$input = $request->all();
+        $educadora = educadora::findOrFail($id);
+        return $educadora;
+    }
+
+    //Buscar una educadora por codigo de curso.
+
 
     /**
      * Store a newly created resource in storage.

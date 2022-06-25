@@ -18,9 +18,11 @@ class _FormAlumnosState extends State<FormAlumnos> {
   TextEditingController ninoController = TextEditingController();
   TextEditingController tiaController = TextEditingController();
 
-  String label1 = 'Rut';
-  String label2 = 'Nombre';
-  String label3 = 'Apellido';
+  String label1 = 'Codigo Del Curso';
+  String label2 = 'Nombre Del Curso';
+  String label3 = 'Grado Del Curso';
+  String label4 = 'Tia Asignada';
+  String label5 = 'Descripcion';
 
   String rutValue = '';
   String nombreValue = '';
@@ -37,7 +39,7 @@ class _FormAlumnosState extends State<FormAlumnos> {
             automaticallyImplyLeading: false,
             backgroundColor: kRosa,
             title: Text(
-              'Formulario Ingreso Niños y Niñas',
+              'Formulario Ingreso Datos Curso',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: kMorado,
@@ -100,32 +102,7 @@ class _FormAlumnosState extends State<FormAlumnos> {
                       'Agregar Nivel',
                       style: TextStyle(color: kRosa),
                     ),
-                    onPressed: () async {
-                      //String rut = rutController.text.toString();
-                      //String nombre = nombreController.text;
-                      //String apellido = apellidoController.text;
-                      //String genero = generoController.text;
-
-                      //var res = await NinosProvider()
-                      //.ninosAgregar(rut, nombre, apellido, genero);
-                      //if (res.isEmpty) {
-                      //print(res);
-                      //Aqui un Snackbar
-                      //showSnackbar(' $nombre No Se Ha Podido Agregar');
-                      //} else {
-                      //showSnackbar(' $nombre Agregad@');
-                      //Navigator.pop(context);
-                      //}
-                      //int stock = int.tryParse(stockCtrl.text) ?? 0;
-                      //int precio = int.tryParse(precioCtrl.text) ?? 0;
-
-                      //var respuesta = await NinosProvider().ninosAgregar(
-                      //rutValue.trim(),
-                      //nombreValue.trim(),
-                      //apellidoValue.trim(),
-                      //generoValue.trim(),
-                      //);
-                    }),
+                    onPressed: () async {}),
               ),
             ],
           ),

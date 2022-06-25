@@ -1,4 +1,5 @@
 import 'package:app_jardin/Formularios/form_alumnos.dart';
+import 'package:app_jardin/Listar/listar_eventos_alumno.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:app_jardin/providers/niños_provider.dart';
@@ -75,6 +76,17 @@ class _ListarAlumnosState extends State<ListarAlumnos> {
                   trailing: Wrap(
                     spacing: 12,
                     children: <Widget>[
+                      IconButton(
+                        icon: FaIcon(FontAwesomeIcons.bookAtlas),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(
+                                  builder: (context) => SecondPage(
+                                        nino['rut_nino'],
+                                      )))
+                              .then((_) => setState(() {}));
+                        },
+                      ),
                       IconButton(
                         icon: FaIcon(FontAwesomeIcons.penToSquare),
                         onPressed: () {},

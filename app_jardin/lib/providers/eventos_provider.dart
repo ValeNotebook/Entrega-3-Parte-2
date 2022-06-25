@@ -18,6 +18,35 @@ class EventosProvider {
     }
   }
 
+  Future<List<dynamic>> getEventoByNino(nino) async {
+    var uri = Uri.parse('$apiURL/eventos/get/nino?filtro=$nino');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return [];
+    }
+  }
+
+  Future<LinkedHashMap<String, dynamic>> eventosAgregar(
+      String nino, String tia, String descripcion) async {
+    var uri = Uri.parse('$apiURL/eventos');
+    var respuesta = await http.post(
+      uri,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json'
+      },
+      body: jsonEncode(<String, dynamic>{
+        'nino': nino,
+        'tia': tia,
+        'descripcion': descripcion,
+      }),
+    );
+    return json.decode(respuesta.body);
+  }
+
   Future<bool> eventossBorrar(int cod_evento) async {
     var uri = Uri.parse('$apiURL/eventos/$cod_evento');
     var respuesta = await http.delete(uri);
