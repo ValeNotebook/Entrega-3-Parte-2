@@ -5,13 +5,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_jardin/paleta_colores.dart';
 
 class FormEventos extends StatefulWidget {
-  FormEventos({Key? key}) : super(key: key);
+  String something;
 
+  FormEventos(this.something);
   @override
-  State<FormEventos> createState() => _FormEventosState();
+  State<StatefulWidget> createState() {
+    return FormEventosState(this.something);
+  }
 }
 
-class _FormEventosState extends State<FormEventos> {
+class FormEventosState extends State<FormEventos> {
+  String something;
+
+  FormEventosState(this.something);
+
   final formKey = GlobalKey<FormState>();
 
   //Falta validar que existen los alumnos, y traer los datos
@@ -38,7 +45,7 @@ class _FormEventosState extends State<FormEventos> {
             automaticallyImplyLeading: false,
             backgroundColor: kRosa,
             title: Text(
-              'Formulario Ingreso Eventos',
+              'Formulario Ingreso Evento',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: kMorado,
@@ -63,8 +70,11 @@ class _FormEventosState extends State<FormEventos> {
             children: [
               TextFormField(
                 cursorColor: kMorado,
+                initialValue: something,
+                readOnly: true,
+
                 keyboardType: TextInputType.number,
-                controller: ninoController,
+                //controller: ninoController,
                 decoration: decorationInput(label2),
                 style: TextStyle(
                   fontSize: 15,
@@ -98,16 +108,16 @@ class _FormEventosState extends State<FormEventos> {
                         textStyle: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold)),
                     child: Text(
-                      'Agregar Nivel',
+                      'Agregar Evento',
                       style: TextStyle(color: kRosa),
                     ),
                     onPressed: () async {
-                      String nino = ninoController.text.toString();
+                      //String nino = ninoController.text.toString();
                       String tia = tiaController.text.toString();
                       String descripcion = descripcionController.text;
 
                       var res = await EventosProvider()
-                          .eventosAgregar(nino, tia, descripcion);
+                          .eventosAgregar(something, tia, descripcion);
                       if (res.isEmpty) {
                         print(res);
                         //Aqui un Snackbar

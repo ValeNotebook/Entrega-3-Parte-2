@@ -82,8 +82,7 @@ class _ListarAlumnosState extends State<ListarAlumnos> {
                           Navigator.of(context)
                               .push(MaterialPageRoute(
                                   builder: (context) => SecondPage(
-                                        nino['rut_nino'],
-                                      )))
+                                      nino['rut_nino'], nino['nombre_nino'])))
                               .then((_) => setState(() {}));
                         },
                       ),

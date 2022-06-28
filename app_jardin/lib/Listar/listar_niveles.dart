@@ -1,3 +1,4 @@
+import 'package:app_jardin/Formularios/form_niveles.dart';
 import 'package:app_jardin/providers/cursos_provider.dart';
 import 'package:app_jardin/providers/eventos_provider.dart';
 
@@ -32,7 +33,12 @@ class _ListarNivelesState extends State<ListarNiveles> {
               color: kMorado,
               icon: FaIcon(FontAwesomeIcons.plus),
               tooltip: 'Agregar Niveles',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .push(
+                        MaterialPageRoute(builder: (context) => FormNiveles()))
+                    .then((_) => setState(() {}));
+              },
             )
           ],
         ),

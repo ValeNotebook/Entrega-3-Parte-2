@@ -3,14 +3,14 @@ import 'package:app_jardin/providers/niños_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_jardin/paleta_colores.dart';
 
-class FormAlumnos extends StatefulWidget {
-  FormAlumnos({Key? key}) : super(key: key);
+class FormNiveles extends StatefulWidget {
+  FormNiveles({Key? key}) : super(key: key);
 
   @override
-  State<FormAlumnos> createState() => _FormAlumnosState();
+  State<FormNiveles> createState() => _FormNivelesState();
 }
 
-class _FormAlumnosState extends State<FormAlumnos> {
+class _FormNivelesState extends State<FormNiveles> {
   final formKey = GlobalKey<FormState>();
 
   TextEditingController codigoController = TextEditingController();

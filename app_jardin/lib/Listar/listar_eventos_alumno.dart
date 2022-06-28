@@ -9,17 +9,20 @@ import 'package:app_jardin/paleta_colores.dart';
 
 class SecondPage extends StatefulWidget {
   String something;
-  SecondPage(this.something);
+  String something2;
+  SecondPage(this.something, this.something2);
   @override
   State<StatefulWidget> createState() {
-    return SecondPageState(this.something);
+    return SecondPageState(this.something, this.something2);
   }
 }
 
 class SecondPageState extends State<SecondPage> {
   String something;
-  SecondPageState(this.something);
-
+  String something2;
+  SecondPageState(this.something, this.something2);
+  //something es rut-nino
+  //something es nombre_nino
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +32,7 @@ class SecondPageState extends State<SecondPage> {
         child: AppBar(
           backgroundColor: kRosa,
           title: Text(
-            'Eventos De $something',
+            'Eventos De $something2',
             style: TextStyle(fontWeight: FontWeight.bold, color: kMorado),
           ),
           actions: <Widget>[
@@ -40,8 +43,8 @@ class SecondPageState extends State<SecondPage> {
               onPressed: () {
                 //Push y setState luego de agregar Evento
                 Navigator.of(context)
-                    .push(
-                        MaterialPageRoute(builder: (context) => FormEventos()))
+                    .push(MaterialPageRoute(
+                        builder: (context) => FormEventos(something)))
                     .then((_) => setState(() {}));
               },
             )
