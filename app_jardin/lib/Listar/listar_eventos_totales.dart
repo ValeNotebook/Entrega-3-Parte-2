@@ -24,7 +24,7 @@ class _ListarEventosState extends State<ListarEventos> {
         child: AppBar(
           backgroundColor: kRosa,
           title: Text(
-            'Eventos Y Sucesos Del Jardin',
+            'Bitacora Eventos Del Jardin',
             style: TextStyle(fontWeight: FontWeight.bold, color: kMorado),
           ),
         ),

@@ -61,6 +61,7 @@ class FormEventosState extends State<FormEventos> {
               },
             )),
       ),
+      //Aqui Inician Los Formularios
       body: Form(
         key: formKey,
         child: Padding(
@@ -72,7 +73,6 @@ class FormEventosState extends State<FormEventos> {
                 cursorColor: kMorado,
                 initialValue: something,
                 readOnly: true,
-
                 keyboardType: TextInputType.number,
                 //controller: ninoController,
                 decoration: decorationInput(label2),
