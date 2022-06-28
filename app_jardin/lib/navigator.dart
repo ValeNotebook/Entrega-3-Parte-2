@@ -1,6 +1,6 @@
 import 'package:app_jardin/Listar/listar_alumnos.dart';
 import 'package:app_jardin/Listar/listar_educadoras.dart';
-import 'package:app_jardin/Listar/listar_eventos.dart';
+import 'package:app_jardin/Listar/listar_eventos_totales.dart';
 import 'package:app_jardin/Listar/listar_niveles.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
