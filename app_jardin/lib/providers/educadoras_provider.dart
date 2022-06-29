@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 import 'dart:collection';
 import 'package:http/http.dart' as http;
@@ -20,16 +22,15 @@ class EducadorasProvider {
     }
   }
 
-  //Get Una Educadoras
-
-  Future<List<dynamic>> getEducadoraById(id) async {
-    var uri = Uri.parse('$apiURL/educadoras/$id');
+  //get 1 educadora version Pedro
+  Future<LinkedHashMap<String, dynamic>> getTia(String rut_educadora) async {
+    var uri = Uri.parse('$apiURL/educadoras/$rut_educadora');
     var respuesta = await http.get(uri);
 
     if (respuesta.statusCode == 200) {
       return json.decode(respuesta.body);
     } else {
-      return [];
+      return new LinkedHashMap();
     }
   }
 
@@ -56,5 +57,23 @@ class EducadorasProvider {
     var uri = Uri.parse('$apiURL/educadoras/$rut_educadora');
     var respuesta = await http.delete(uri);
     return respuesta.statusCode == 200;
+  }
+
+  Future<LinkedHashMap<String, dynamic>> tiasEditar(String rut_educadora,
+      String rut_educadora_nuevo, String nombre_tia, String apellido) async {
+    var uri = Uri.parse('$apiURL/educadoras/$rut_educadora');
+    var respuesta = await http.put(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'rut_educadora': rut_educadora,
+          'rut_educadora_nuevo': rut_educadora_nuevo,
+          'nombre_tia': nombre_tia,
+          'apellido': apellido
+        }));
+
+    return json.decode(respuesta.body);
   }
 }

@@ -14,14 +14,15 @@ enum Menu {
   itemTwo,
 }
 
-class ListarEducadoras extends StatefulWidget {
-  ListarEducadoras({Key? key}) : super(key: key);
+class NiveleslistadoEducadoras extends StatefulWidget {
+  NiveleslistadoEducadoras({Key? key}) : super(key: key);
 
   @override
-  State<ListarEducadoras> createState() => _ListarEducadorasState();
+  State<NiveleslistadoEducadoras> createState() =>
+      _NiveleslistadoEducadorasState();
 }
 
-class _ListarEducadorasState extends State<ListarEducadoras> {
+class _NiveleslistadoEducadorasState extends State<NiveleslistadoEducadoras> {
   String _selectedMenu = '';
   @override
   Widget build(BuildContext context) {
@@ -91,32 +92,6 @@ class _ListarEducadorasState extends State<ListarEducadoras> {
                           });
                         },
                       ),
-                      IconButton(
-                        icon: FaIcon(FontAwesomeIcons.trashCan),
-                        onPressed: () {
-                          String rutEducadora = educadora['rut_educadora'];
-                          String nombre = educadora['nombre_tia'];
-                          confirmDialog(context, nombre).then((confirma) {
-                            if (confirma) {
-                              //borrar
-                              EducadorasProvider()
-                                  .educadorasBorrar(rutEducadora)
-                                  .then((borradoOk) {
-                                if (borradoOk) {
-                                  //pudo borrar
-                                  snap.data.removeAt(index);
-                                  setState(() {});
-                                  showSnackbar('Educadora $nombre Borrada');
-                                } else {
-                                  //no pudo borrar
-                                  showSnackbar(
-                                      'No se pudo borrar la Educadora');
-                                }
-                              });
-                            }
-                          });
-                        },
-                      ),
                     ],
                   ),
                 ),
@@ -134,29 +109,6 @@ class _ListarEducadorasState extends State<ListarEducadoras> {
         duration: Duration(seconds: 2),
         content: Text(mensaje),
       ),
-    );
-  }
-
-  Future<dynamic> confirmDialog(BuildContext context, String educadora) {
-    return showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text('Confirmar borrado'),
-          content: Text('¿Borrar la Educadora $educadora?'),
-          actions: [
-            TextButton(
-              child: Text('CANCELAR'),
-              onPressed: () => Navigator.pop(context, false),
-            ),
-            ElevatedButton(
-              child: Text('ACEPTAR'),
-              onPressed: () => Navigator.pop(context, true),
-            ),
-          ],
-        );
-      },
     );
   }
 }

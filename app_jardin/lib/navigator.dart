@@ -1,4 +1,5 @@
 import 'package:app_jardin/Listar/listar_alumnos.dart';
+import 'package:app_jardin/Listar/listar_alumnos_dos.dart';
 import 'package:app_jardin/Listar/listar_educadoras.dart';
 import 'package:app_jardin/Listar/listar_eventos_totales.dart';
 import 'package:app_jardin/Listar/listar_niveles.dart';
@@ -24,11 +25,11 @@ class _NavigatorBarState extends State<NavigatorBar> {
   //Recomiendo usar solo Stateful
   final screens = [
     //Aqui Iran Las Paginas a Navegar
-    ListarAlumnos(),
+    ListarAlumnosDos(),
     ListarEventos(),
     ListarEducadoras(),
     ListarNiveles(),
-    ListarNiveles(),
+    ListarAlumnos(),
 
     //Luego en el scafolld, utilizar
     //body : screens[indexs]

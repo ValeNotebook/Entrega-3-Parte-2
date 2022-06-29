@@ -1,27 +1,22 @@
-// ignore_for_file: prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_constructors
 
-import 'package:app_jardin/Formularios/form_niveles.dart';
-
-import 'package:app_jardin/niveles/niveles_listado_alumnos.dart';
-import 'package:app_jardin/providers/cursos_provider.dart';
-import 'package:app_jardin/providers/eventos_provider.dart';
-
+import 'package:app_jardin/Formularios/form_alumnos.dart';
+import 'package:app_jardin/Listar/listar_eventos_alumno.dart';
+import 'package:app_jardin/editar/editar_ninos.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:app_jardin/providers/niños_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_jardin/paleta_colores.dart';
 
-import '../niveles/niveles_listado_educadoras.dart';
-
-class ListarNiveles extends StatefulWidget {
-  ListarNiveles({Key? key}) : super(key: key);
+class ListarAlumnosDos extends StatefulWidget {
+  ListarAlumnosDos({Key? key}) : super(key: key);
 
   @override
-  State<ListarNiveles> createState() => _ListarNivelesState();
+  State<ListarAlumnosDos> createState() => _ListarAlumnosDosState();
 }
 
-class _ListarNivelesState extends State<ListarNiveles> {
+class _ListarAlumnosDosState extends State<ListarAlumnosDos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,18 +26,19 @@ class _ListarNivelesState extends State<ListarNiveles> {
         child: AppBar(
           backgroundColor: kRosa,
           title: Text(
-            'Listado y Gestion De Niveles',
+            'Listado Niños y Niñas Del Jardin',
             style: TextStyle(fontWeight: FontWeight.bold, color: kMorado),
           ),
           actions: <Widget>[
             IconButton(
               color: kMorado,
               icon: FaIcon(FontAwesomeIcons.plus),
-              tooltip: 'Agregar Niveles',
+              tooltip: 'Agregar Niños',
               onPressed: () {
+                //Push y setState luego de agregar Alumno
                 Navigator.of(context)
                     .push(
-                        MaterialPageRoute(builder: (context) => FormNiveles()))
+                        MaterialPageRoute(builder: (context) => FormAlumnos()))
                     .then((_) => setState(() {}));
               },
             )
@@ -50,7 +46,7 @@ class _ListarNivelesState extends State<ListarNiveles> {
         ),
       ),
       body: FutureBuilder(
-        future: CursosProvider().getCursos(),
+        future: NinosProvider().getNinos(),
         builder: (context, AsyncSnapshot snap) {
           if (!snap.hasData) {
             return Center(
@@ -64,65 +60,68 @@ class _ListarNivelesState extends State<ListarNiveles> {
             ),
             itemCount: snap.data.length,
             itemBuilder: (context, index) {
-              var nivel = snap.data[index];
+              var nino = snap.data[index];
               return Card(
                 margin: EdgeInsets.all(10.0),
                 color: kVioleta,
                 elevation: 0,
                 child: ListTile(
-                  title: Text((nivel['cod_curso']).toString()),
-                  subtitle: Text(nivel['nombre_grado']),
+                  //Para la imagen del ni;o
+                  leading: CircleAvatar(
+                    backgroundColor: kCeleste,
+                    //child: ClipRRect(
+                    //child: Image.asset(' '),
+                    //borderRadius: BorderRadius.circular(50.0),
+                    //),
+                  ),
+                  title: Text(nino['nombre_nino'] + ' ' + nino['apellido']),
+                  subtitle: Text(nino['rut_nino']),
                   trailing: Wrap(
                     spacing: 12,
                     children: <Widget>[
                       IconButton(
-                        icon: FaIcon(
-                          FontAwesomeIcons.tasks,
-                        ),
+                        icon: FaIcon(FontAwesomeIcons.bookAtlas),
                         onPressed: () {
                           Navigator.of(context)
                               .push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      NiveleslistadoEducadoras()))
+                                  builder: (context) => SecondPage(
+                                      nino['rut_nino'], nino['nombre_nino'])))
                               .then((_) => setState(() {}));
                         },
                       ),
                       IconButton(
                         icon: FaIcon(FontAwesomeIcons.penToSquare),
                         onPressed: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      NivelesListadoAlumnos()))
-                              .then((_) => setState(() {}));
-                        },
-                      ),
-                      IconButton(
-                        icon: FaIcon(FontAwesomeIcons.penToSquare),
-                        onPressed: () {
-                          //Aqui Va El Editar
+                          MaterialPageRoute ruta2 =
+                              MaterialPageRoute(builder: (context) {
+                            return EditarNinos(
+                                nino['rut_nino'], nino['nombre_nino']);
+                          });
+                          //print('llega hasta aqui');
+                          Navigator.push(context, ruta2).then((value) {
+                            setState(() {});
+                          });
                         },
                       ),
                       IconButton(
                         icon: FaIcon(FontAwesomeIcons.trashCan),
                         onPressed: () {
-                          String codigo = nivel['cod_curso'];
-
-                          confirmDialog(context, codigo).then((confirma) {
+                          String rutNino = nino['rut_nino'];
+                          String nombre = nino['nombre_nino'];
+                          confirmDialog(context, nombre).then((confirma) {
                             if (confirma) {
                               //borrar
-                              CursosProvider()
-                                  .cursosBorrar(codigo)
+                              NinosProvider()
+                                  .ninosBorrar(rutNino)
                                   .then((borradoOk) {
                                 if (borradoOk) {
                                   //pudo borrar
                                   snap.data.removeAt(index);
                                   setState(() {});
-                                  showSnackbar(
-                                      'Nivel de codigo $codigo Borrado');
+                                  showSnackbar('Alumno $nombre Borrado');
                                 } else {
                                   //no pudo borrar
-                                  showSnackbar('No se pudo borrar el evento');
+                                  showSnackbar('No se pudo borrar el Alumno');
                                 }
                               });
                             }
@@ -150,14 +149,14 @@ class _ListarNivelesState extends State<ListarNiveles> {
     );
   }
 
-  Future<dynamic> confirmDialog(BuildContext context, String codigo) {
+  Future<dynamic> confirmDialog(BuildContext context, String nino) {
     return showDialog(
       barrierDismissible: false,
       context: context,
       builder: (context) {
         return AlertDialog(
           title: Text('Confirmar borrado'),
-          content: Text('¿Borrar el Nivel De Codigo $codigo?'),
+          content: Text('¿Borrar el Alumno $nino?'),
           actions: [
             TextButton(
               child: Text('CANCELAR'),

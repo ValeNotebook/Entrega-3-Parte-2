@@ -1,9 +1,12 @@
+// ignore_for_file: unused_import, duplicate_import, must_be_immutable, use_key_in_widget_constructors, no_logic_in_create_state
+
 import 'package:app_jardin/Formularios/form_eventos.dart';
+import 'package:app_jardin/editar/editar_evento.dart';
 import 'package:app_jardin/providers/eventos_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:app_jardin/providers/niños_provider.dart';
-import 'package:app_jardin/providers/eventos_provider.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_jardin/paleta_colores.dart';
 
@@ -82,7 +85,21 @@ class SecondPageState extends State<SecondPage> {
                     children: <Widget>[
                       IconButton(
                         icon: FaIcon(FontAwesomeIcons.penToSquare),
-                        onPressed: () {},
+                        onPressed: () {
+                          //Aqui va el editar
+                          print(evento['cod_evento']);
+
+                          int even = evento['cod_evento'];
+                          String even2 = even.toString();
+                          MaterialPageRoute ruta2 =
+                              MaterialPageRoute(builder: (context) {
+                            return EditarEventos(even);
+                          });
+                          //print('llega hasta aqui');
+                          Navigator.push(context, ruta2).then((value) {
+                            setState(() {});
+                          });
+                        },
                       ),
                       IconButton(
                         icon: FaIcon(FontAwesomeIcons.trashCan),
