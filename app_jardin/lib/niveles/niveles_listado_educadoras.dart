@@ -33,23 +33,9 @@ class _NiveleslistadoEducadorasState extends State<NiveleslistadoEducadoras> {
         child: AppBar(
           backgroundColor: kRosa,
           title: Text(
-            'Educadoras',
+            'Gestionar Educadoras',
             style: TextStyle(fontWeight: FontWeight.bold, color: kMorado),
           ),
-          actions: <Widget>[
-            IconButton(
-              color: kMorado,
-              icon: FaIcon(FontAwesomeIcons.plus),
-              tooltip: 'Agregar Educadora',
-              onPressed: () {
-                //Push y setState luego de agregar Educadora
-                Navigator.of(context)
-                    .push(MaterialPageRoute(
-                        builder: (context) => FormEducadoras()))
-                    .then((_) => setState(() {}));
-              },
-            )
-          ],
         ),
       ),
       body: FutureBuilder(
@@ -79,18 +65,9 @@ class _NiveleslistadoEducadorasState extends State<NiveleslistadoEducadoras> {
                     spacing: 12,
                     children: <Widget>[
                       IconButton(
-                        icon: FaIcon(FontAwesomeIcons.penToSquare),
-                        onPressed: () {
-                          //Aqui va el editar
-                          MaterialPageRoute ruta2 =
-                              MaterialPageRoute(builder: (context) {
-                            return EditarTias(educadora['rut_educadora']);
-                          });
-                          //print('llega hasta aqui');
-                          Navigator.push(context, ruta2).then((value) {
-                            setState(() {});
-                          });
-                        },
+                        tooltip: 'Gestionar Educadora',
+                        icon: FaIcon(FontAwesomeIcons.heart),
+                        onPressed: () {},
                       ),
                     ],
                   ),

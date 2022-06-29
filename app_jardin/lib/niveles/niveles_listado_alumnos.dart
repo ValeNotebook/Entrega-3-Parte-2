@@ -10,13 +10,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_jardin/paleta_colores.dart';
 
 class NivelesListadoAlumnos extends StatefulWidget {
-  NivelesListadoAlumnos({Key? key}) : super(key: key);
+  String curso;
+
+  NivelesListadoAlumnos(this.curso);
 
   @override
-  State<NivelesListadoAlumnos> createState() => _NivelesListadoAlumnosState();
+  State<StatefulWidget> createState() {
+    return _NivelesListadoAlumnosState(curso);
+  }
 }
 
 class _NivelesListadoAlumnosState extends State<NivelesListadoAlumnos> {
+  String curso;
+  _NivelesListadoAlumnosState(this.curso);
+  String iconName = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,23 +33,9 @@ class _NivelesListadoAlumnosState extends State<NivelesListadoAlumnos> {
         child: AppBar(
           backgroundColor: kRosa,
           title: Text(
-            'Listado Niños y Niñas Del Jardin',
+            'Niños y Niñas Del Curso',
             style: TextStyle(fontWeight: FontWeight.bold, color: kMorado),
           ),
-          actions: <Widget>[
-            IconButton(
-              color: kMorado,
-              icon: FaIcon(FontAwesomeIcons.plus),
-              tooltip: 'Agregar Niños',
-              onPressed: () {
-                //Push y setState luego de agregar Alumno
-                Navigator.of(context)
-                    .push(
-                        MaterialPageRoute(builder: (context) => FormAlumnos()))
-                    .then((_) => setState(() {}));
-              },
-            )
-          ],
         ),
       ),
       body: FutureBuilder(
@@ -61,6 +54,13 @@ class _NivelesListadoAlumnosState extends State<NivelesListadoAlumnos> {
             itemCount: snap.data.length,
             itemBuilder: (context, index) {
               var nino = snap.data[index];
+              if (nino['curso'] == curso) {
+                print('nino_curso');
+                print(nino['curso']);
+                print('el curso');
+                print(curso);
+                iconName = 'red';
+              }
               return Card(
                 margin: EdgeInsets.all(10.0),
                 color: kVioleta,
@@ -73,27 +73,16 @@ class _NivelesListadoAlumnosState extends State<NivelesListadoAlumnos> {
                     spacing: 12,
                     children: <Widget>[
                       IconButton(
-                        icon: FaIcon(FontAwesomeIcons.bookAtlas),
+                        tooltip: 'Gestionar Alumno',
+                        icon: FaIcon(
+                          FontAwesomeIcons.heart,
+                          color: iconName == 'red' ? Colors.red : Colors.grey,
+                        ),
                         onPressed: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(
-                                  builder: (context) => SecondPage(
-                                      nino['rut_nino'], nino['nombre_nino'])))
-                              .then((_) => setState(() {}));
-                        },
-                      ),
-                      IconButton(
-                        icon: FaIcon(FontAwesomeIcons.penToSquare),
-                        onPressed: () {
-                          MaterialPageRoute ruta2 =
-                              MaterialPageRoute(builder: (context) {
-                            return EditarNinos(
-                                nino['rut_nino'], nino['nombre_nino']);
-                          });
-                          //print('llega hasta aqui');
-                          Navigator.push(context, ruta2).then((value) {
-                            setState(() {});
-                          });
+                          if (nino['curso'] == curso) {
+                            print('Es El Mismo Curso');
+                            print('Hay que desagregar el curso con el edit');
+                          }
                         },
                       ),
                     ],

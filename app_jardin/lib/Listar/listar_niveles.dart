@@ -77,6 +77,7 @@ class _ListarNivelesState extends State<ListarNiveles> {
                     spacing: 12,
                     children: <Widget>[
                       IconButton(
+                        tooltip: 'Listado Educadoras',
                         icon: FaIcon(
                           FontAwesomeIcons.addressBook,
                         ),
@@ -89,22 +90,25 @@ class _ListarNivelesState extends State<ListarNiveles> {
                         },
                       ),
                       IconButton(
+                        tooltip: 'Listado Alumnos',
                         icon: FaIcon(FontAwesomeIcons.childReaching),
                         onPressed: () {
                           Navigator.of(context)
                               .push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      NivelesListadoAlumnos()))
+                                  builder: (context) => NivelesListadoAlumnos(
+                                      nivel['cod_curso'])))
                               .then((_) => setState(() {}));
                         },
                       ),
                       IconButton(
+                        tooltip: 'Editar',
                         icon: FaIcon(FontAwesomeIcons.penToSquare),
                         onPressed: () {
                           //Aqui Va El Editar
                         },
                       ),
                       IconButton(
+                        tooltip: 'Eliminar',
                         icon: FaIcon(FontAwesomeIcons.trashCan),
                         onPressed: () {
                           String codigo = nivel['cod_curso'];
