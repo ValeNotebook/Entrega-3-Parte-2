@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 class EducadorasProvider {
   final String apiURL = 'http://10.0.2.2:8000/api';
 
-  //Get All Educadoras
+  //Get Todas las Educadoras
 
   Future<List<dynamic>> getEducadoras() async {
     var uri = Uri.parse('$apiURL/educadoras');
@@ -73,6 +73,24 @@ class EducadorasProvider {
           'nombre_tia': nombre_tia,
           'apellido': apellido
         }));
+
+    return json.decode(respuesta.body);
+  }
+
+  Future<LinkedHashMap<String, dynamic>> educadoraEditarCurso(
+      String rut_educadora, String cod_curso) async {
+    var uri = Uri.parse('$apiURL/educadoras/$rut_educadora/post/$cod_curso');
+    var respuesta = await http.put(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(
+          <String, dynamic>{
+            'rut_educadora': rut_educadora,
+            'cod_curso': cod_curso,
+          },
+        ));
 
     return json.decode(respuesta.body);
   }

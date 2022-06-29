@@ -9,6 +9,8 @@ import 'package:intl/intl.dart';
 class NinosProvider {
   final String apiURL = 'http://10.0.2.2:8000/api';
 
+//Get todos los ninos
+
   Future<List<dynamic>> getNinos() async {
     var uri = Uri.parse('$apiURL/ninos');
     var respuesta = await http.get(uri);
@@ -19,6 +21,8 @@ class NinosProvider {
       return [];
     }
   }
+
+//Agregar Nino
 
   Future<LinkedHashMap<String, dynamic>> ninosAgregar(String rut_nino,
       String nombre_nino, String apellido, String genero) async {
@@ -91,6 +95,22 @@ class NinosProvider {
           'nombre_nino': nombre_nino,
           'apellido': apellido,
           'genero': genero
+        }));
+
+    return json.decode(respuesta.body);
+  }
+
+  Future<LinkedHashMap<String, dynamic>> ninoEditarCurso(
+      String rut_nino, String cod_curso) async {
+    var uri = Uri.parse('$apiURL/ninos/$rut_nino/post/$cod_curso');
+    var respuesta = await http.put(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'rut_nino': rut_nino,
+          'cod_curso': cod_curso,
         }));
 
     return json.decode(respuesta.body);

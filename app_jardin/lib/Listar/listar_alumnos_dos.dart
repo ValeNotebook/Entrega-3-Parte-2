@@ -17,6 +17,7 @@ class ListarAlumnosDos extends StatefulWidget {
 }
 
 class _ListarAlumnosDosState extends State<ListarAlumnosDos> {
+  var cursoList = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +62,12 @@ class _ListarAlumnosDosState extends State<ListarAlumnosDos> {
             itemCount: snap.data.length,
             itemBuilder: (context, index) {
               var nino = snap.data[index];
+
+              if (nino['curso'] == null) {
+                cursoList = 'Sin Asignar';
+              } else {
+                cursoList = nino['curso'];
+              }
               return Card(
                 margin: EdgeInsets.all(10.0),
                 color: kVioleta,
@@ -75,7 +82,8 @@ class _ListarAlumnosDosState extends State<ListarAlumnosDos> {
                     //),
                   ),
                   title: Text(nino['nombre_nino'] + ' ' + nino['apellido']),
-                  subtitle: Text(nino['rut_nino']),
+                  subtitle:
+                      Text(nino['rut_nino'] + '\n' + 'Curso: ' + '$cursoList'),
                   trailing: Wrap(
                     spacing: 12,
                     children: <Widget>[

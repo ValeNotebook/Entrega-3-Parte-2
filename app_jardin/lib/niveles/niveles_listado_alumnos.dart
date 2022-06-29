@@ -22,6 +22,7 @@ class NivelesListadoAlumnos extends StatefulWidget {
 
 class _NivelesListadoAlumnosState extends State<NivelesListadoAlumnos> {
   String curso;
+
   _NivelesListadoAlumnosState(this.curso);
   String iconName = '';
   @override
@@ -53,12 +54,9 @@ class _NivelesListadoAlumnosState extends State<NivelesListadoAlumnos> {
             ),
             itemCount: snap.data.length,
             itemBuilder: (context, index) {
+              iconName = '';
               var nino = snap.data[index];
               if (nino['curso'] == curso) {
-                print('nino_curso');
-                print(nino['curso']);
-                print('el curso');
-                print(curso);
                 iconName = 'red';
               }
               return Card(
@@ -75,14 +73,42 @@ class _NivelesListadoAlumnosState extends State<NivelesListadoAlumnos> {
                       IconButton(
                         tooltip: 'Gestionar Alumno',
                         icon: FaIcon(
-                          FontAwesomeIcons.heart,
-                          color: iconName == 'red' ? Colors.red : Colors.grey,
+                          FontAwesomeIcons.solidStar,
+                          color: iconName == 'red'
+                              ? Color(0xffB689C0)
+                              : Colors.grey,
                         ),
-                        onPressed: () {
-                          if (nino['curso'] == curso) {
-                            print('Es El Mismo Curso');
-                            print('Hay que desagregar el curso con el edit');
+                        onPressed: () async {
+                          var nada = 'nada';
+
+                          print('se esta apretando el boton');
+
+                          if (nino['curso'] != curso) {
+                            print('Es Curso Distinto');
+                            print(curso);
+                            print(nino['curso']);
+
+                            String rut_nino = nino['rut_nino'];
+
+                            var res = await NinosProvider()
+                                .ninoEditarCurso(rut_nino, curso);
+
+                            setState(() {});
+                            showSnackbar('Alumno Agregado');
+
+                            Navigator.pop(context);
                           }
+                          if (nino['curso'] == curso) {
+                            String rut_nino = nino['rut_nino'];
+                            var res = await NinosProvider()
+                                .ninoEditarCurso(rut_nino, nada);
+                            showSnackbar('Alumno Removido');
+                            Navigator.pop(context);
+
+                            print('Es Curso Iguales');
+                          }
+
+                          setState(() {});
                         },
                       ),
                     ],

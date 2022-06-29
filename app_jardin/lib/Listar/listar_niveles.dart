@@ -85,7 +85,8 @@ class _ListarNivelesState extends State<ListarNiveles> {
                           Navigator.of(context)
                               .push(MaterialPageRoute(
                                   builder: (context) =>
-                                      NiveleslistadoEducadoras()))
+                                      NiveleslistadoEducadoras(
+                                          nivel['cod_curso'])))
                               .then((_) => setState(() {}));
                         },
                       ),

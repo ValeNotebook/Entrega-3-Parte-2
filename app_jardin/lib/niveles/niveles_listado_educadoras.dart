@@ -9,21 +9,21 @@ import 'package:app_jardin/providers/niños_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_jardin/paleta_colores.dart';
 
-enum Menu {
-  itemOne,
-  itemTwo,
-}
-
 class NiveleslistadoEducadoras extends StatefulWidget {
-  NiveleslistadoEducadoras({Key? key}) : super(key: key);
+  String curso;
+
+  NiveleslistadoEducadoras(this.curso);
 
   @override
-  State<NiveleslistadoEducadoras> createState() =>
-      _NiveleslistadoEducadorasState();
+  State<StatefulWidget> createState() {
+    return _NiveleslistadoEducadorasState(curso);
+  }
 }
 
 class _NiveleslistadoEducadorasState extends State<NiveleslistadoEducadoras> {
-  String _selectedMenu = '';
+  String curso;
+  _NiveleslistadoEducadorasState(this.curso);
+  String iconName = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +53,11 @@ class _NiveleslistadoEducadorasState extends State<NiveleslistadoEducadoras> {
             ),
             itemCount: snap.data.length,
             itemBuilder: (context, index) {
+              iconName = '';
               var educadora = snap.data[index];
+              if (educadora['curso'] == curso) {
+                iconName = 'red';
+              }
               return Card(
                 margin: EdgeInsets.all(10.0),
                 color: kVioleta,
@@ -66,8 +70,42 @@ class _NiveleslistadoEducadorasState extends State<NiveleslistadoEducadoras> {
                     children: <Widget>[
                       IconButton(
                         tooltip: 'Gestionar Educadora',
-                        icon: FaIcon(FontAwesomeIcons.heart),
-                        onPressed: () {},
+                        icon: FaIcon(
+                          FontAwesomeIcons.solidStar,
+                          color: iconName == 'red'
+                              ? Color(0xffB689C0)
+                              : Colors.grey,
+                        ),
+                        onPressed: () async {
+                          var nada = 'nada';
+
+                          if (educadora['curso'] != curso) {
+                            print('Es Curso Distinto');
+                            print(curso);
+                            print(educadora['curso']);
+
+                            String rut_nino = educadora['rut_nino'];
+
+                            var res = await EducadorasProvider()
+                                .educadoraEditarCurso(rut_nino, curso);
+
+                            setState(() {});
+                            showSnackbar('Educadora Agregado');
+
+                            Navigator.pop(context);
+                          }
+                          if (educadora['curso'] == curso) {
+                            String rut_educadora = educadora['rut_educadora'];
+                            var res = await EducadorasProvider()
+                                .educadoraEditarCurso(rut_educadora, nada);
+                            showSnackbar('Educadora Removido');
+                            Navigator.pop(context);
+
+                            print('Es Curso Iguales');
+                          }
+
+                          setState(() {});
+                        },
                       ),
                     ],
                   ),
