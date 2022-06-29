@@ -16,14 +16,10 @@ class CreateCursosTable extends Migration
         Schema::create('cursos', function (Blueprint $table) {
             $table->string('cod_curso',20)->primary();
             $table->unsignedBigInteger('grado');
-            $table->string('nino');
-            $table->string('tia');
-            $table->string('nombre_grado');
             $table->string('descripcion');
-            //FK
 
-            $table->foreign('tia')->references('rut_educadora')->on('educadoras');
-            $table->foreign('nino')->references('rut_nino')->on('ninos');
+
+
             $table->softDeletes();
         });
     }

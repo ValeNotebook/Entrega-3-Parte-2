@@ -16,6 +16,7 @@ class CreateEventosTable extends Migration
         Schema::create('eventos', function (Blueprint $table) {
             $table->bigIncrements('cod_evento');
             $table->string('nino');
+
             $table->string('tia');
             //$table->unsignedBigInteger('grado');
             $table->string('descripcion');

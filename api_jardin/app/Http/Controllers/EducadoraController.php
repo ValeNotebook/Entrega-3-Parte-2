@@ -61,7 +61,7 @@ class EducadoraController extends Controller
      */
     public function show(educadora $educadora)
     {
-        //
+        return $educadora;
     }
 
     /**
@@ -73,7 +73,11 @@ class EducadoraController extends Controller
      */
     public function update(Request $request, educadora $educadora)
     {
-        //
+        $educadora->rut_educadora = $request->rut_educadora;
+        $educadora->nombre_tia = $request->nombre_tia;
+        $educadora->apellido = $request->apellido;
+        $educadora->save();
+        return $educadora;
     }
 
     /**

@@ -49,7 +49,7 @@ class NinosController extends Controller
      */
     public function show(nino $nino)
     {
-        //
+        return $nino;
     }
 
     /**
@@ -61,7 +61,18 @@ class NinosController extends Controller
      */
     public function update(Request $request, nino $nino)
     {
-        //
+
+        $nino->rut_nino = $request-> rut_nino;
+        $nino->nombre_nino = $request->nombre_nino;
+        $nino->apellido = $request->apellido;
+        $nino->genero = $request->genero;
+        if($nino->save()){
+            return $nino;
+
+        }else{
+            return [];
+
+        }
     }
 
     /**

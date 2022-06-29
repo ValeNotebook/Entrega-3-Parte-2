@@ -50,6 +50,13 @@ class EventoController extends Controller
         return $evento;
     }
 
+    public function getEventoPorId(Request $request){
+        $input = $request->all();
+        $filtro = $input["filtro"];
+        $evento = evento::where("cod_evento",$filtro)->get();
+        return $evento;
+    }
+
     /**
      * Display the specified resource.
      *
@@ -58,7 +65,7 @@ class EventoController extends Controller
      */
     public function show(evento $evento)
     {
-        //
+        return $evento;
     }
 
     /**
@@ -70,8 +77,20 @@ class EventoController extends Controller
      */
     public function update(Request $request, evento $evento)
     {
-        //
+
+        $evento->nino = $request-> nino;
+        $evento->tia = $request->tia;
+        $evento->descripcion = $request->descripcion;
+
+        if($evento->save()){
+            return $evento;
+
+        }else{
+            return [];
+
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.

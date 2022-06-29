@@ -25,6 +25,6 @@ Route::apiResource('/educadoras',EducadoraController::class);
 Route::get('educadoras/get/{id}',[EducadoraController::class,"verEducadora"]);
 Route::apiResource('/eventos',EventoController::class);
 Route::get("eventos/get/nino",[EventoController::class,"getEventoByNinoId"]);
-
+Route::get("eventos/get/cod_evento",[EventoController::class,"getEventoPorId"]);
 Route::apiResource('/ninos',NinosController::class);
 Route::apiResource('/curso',CursosController::class)->parameters(['cursos'=>'curso']);

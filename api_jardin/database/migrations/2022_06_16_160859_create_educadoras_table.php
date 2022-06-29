@@ -17,6 +17,10 @@ class CreateEducadorasTable extends Migration
             $table->string('rut_educadora',10)->primary();
             $table->string('nombre_tia',20);
             $table->string('apellido',20);
+            $table->string('curso')->nullable();
+
+            $table->foreign('curso')->references('cod_curso')->on('cursos');
+
             $table->softDeletes();
 
             //$table->string('fecha_nacimiento');
