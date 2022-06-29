@@ -23,8 +23,11 @@ use App\Http\Controllers\{EducadoraController,EventoController,NinosController,G
 //Route::get('/educadoras',[EducadorasController::class,'index']);
 Route::apiResource('/educadoras',EducadoraController::class);
 Route::get('educadoras/get/{id}',[EducadoraController::class,"verEducadora"]);
+Route::put('educadoras/{rut_educadora}/post/{cod_curso}',[EducadoraController::class,"actualizarCursoEducadora"]);
+
 Route::apiResource('/eventos',EventoController::class);
 Route::get("eventos/get/nino",[EventoController::class,"getEventoByNinoId"]);
 Route::get("eventos/get/cod_evento",[EventoController::class,"getEventoPorId"]);
+Route::put('ninos/{rut_nino}/post/{cod_curso}',[NinosController::class,"actualizarCursoAlumno"]);
 Route::apiResource('/ninos',NinosController::class);
 Route::apiResource('/curso',CursosController::class)->parameters(['cursos'=>'curso']);

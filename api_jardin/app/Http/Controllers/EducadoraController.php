@@ -80,6 +80,17 @@ class EducadoraController extends Controller
         return $educadora;
     }
 
+    public function actualizarCursoEducadora($rut_educadora, $curso){
+        $educadora = educadora::findOrFail($rut_educadora);
+        if ($curso=="nada"){
+            $educadora->curso=NULL;
+        }else{
+            $educadora->curso=$curso;
+        }
+        $educadora->save();
+        return $educadora;
+    }
+
     /**
      * Remove the specified resource from storage.
      *

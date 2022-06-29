@@ -41,6 +41,18 @@ class NinosController extends Controller
 
     }
 
+    public function actualizarCursoAlumno($rut_nino, $curso){
+        $nino = nino::findOrFail($rut_nino);
+        if ($curso=="nada"){
+            $nino->curso=NULL;
+        }else{
+            $nino->curso=$curso;
+        }
+
+        $nino->save();
+        return $nino;
+    }
+
     /**
      * Display the specified resource.
      *
