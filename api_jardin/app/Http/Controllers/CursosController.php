@@ -25,14 +25,15 @@ class CursosController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $curso = new curso();
         $curso->cod_curso = $request-> cod_curso;
-        $educadora->grado = $request->grado;
-        $educadora->apellido = $request->apellido;
+        $curso->nombre_curso = $request -> nombre_curso;
+        $curso->grado = $request->grado;
+        $curso->descripcion = $request->descripcion;
 
-        if($educadora->save()){
-            return $educadora;
+        if($curso->save()){
+            return $curso;
 
         }else{
             return [];
