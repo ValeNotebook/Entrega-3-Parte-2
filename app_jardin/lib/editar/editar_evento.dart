@@ -60,19 +60,13 @@ class _EditarEventosState extends State<EditarEventos> {
 
           var data = snap.data;
 
-          print(Text('evento dos'));
-          print(data);
-          print(widget.evento);
           // print(data['rut_educadora']);
           // print(data['nombre_tia']);
           // print(data['apellido']);
 
           codCtrl.text = data[0]["cod_evento"].toString();
           ninoCtrl.text = data[0]["nino"];
-
-          print(Text('evento tres'));
           tiaCtrl.text = data[0]["tia"];
-          print(Text('evento cuatro'));
           descripcionCtrl.text = data[0]["descripcion"];
 
           return Form(

@@ -29,7 +29,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
     ListarEventos(),
     ListarEducadoras(),
     ListarNiveles(),
-    ListarAlumnos(),
+    //ListarAlumnos(),
 
     //Luego en el scafolld, utilizar
     //body : screens[indexs]
@@ -47,7 +47,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
       ),
       FaIcon(FontAwesomeIcons.addressBook, size: 25),
       FaIcon(FontAwesomeIcons.rainbow, size: 25),
-      FaIcon(FontAwesomeIcons.user, size: 25),
+      //FaIcon(FontAwesomeIcons.user, size: 25),
     ];
 
     return Scaffold(

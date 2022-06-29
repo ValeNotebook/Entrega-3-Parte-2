@@ -71,13 +71,14 @@ class _ListarNivelesState extends State<ListarNiveles> {
                 elevation: 0,
                 child: ListTile(
                   title: Text((nivel['cod_curso']).toString()),
-                  subtitle: Text(nivel['nombre_grado']),
+                  subtitle:
+                      Text(nivel['nombre_curso'] + '\n' + nivel['descripcion']),
                   trailing: Wrap(
                     spacing: 12,
                     children: <Widget>[
                       IconButton(
                         icon: FaIcon(
-                          FontAwesomeIcons.tasks,
+                          FontAwesomeIcons.addressBook,
                         ),
                         onPressed: () {
                           Navigator.of(context)
@@ -88,7 +89,7 @@ class _ListarNivelesState extends State<ListarNiveles> {
                         },
                       ),
                       IconButton(
-                        icon: FaIcon(FontAwesomeIcons.penToSquare),
+                        icon: FaIcon(FontAwesomeIcons.childReaching),
                         onPressed: () {
                           Navigator.of(context)
                               .push(MaterialPageRoute(

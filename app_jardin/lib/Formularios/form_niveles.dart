@@ -14,14 +14,14 @@ class _FormNivelesState extends State<FormNiveles> {
   final formKey = GlobalKey<FormState>();
 
   TextEditingController codigoController = TextEditingController();
+  TextEditingController nombreController = TextEditingController();
   TextEditingController gradoController = TextEditingController();
-  TextEditingController ninoController = TextEditingController();
-  TextEditingController tiaController = TextEditingController();
+  TextEditingController descripcionController = TextEditingController();
 
   String label1 = 'Codigo Del Curso';
   String label2 = 'Nombre Del Curso';
   String label3 = 'Grado Del Curso';
-  String label4 = 'Tia Asignada';
+
   String label5 = 'Descripcion';
 
   String rutValue = '';
@@ -39,7 +39,7 @@ class _FormNivelesState extends State<FormNiveles> {
             automaticallyImplyLeading: false,
             backgroundColor: kRosa,
             title: Text(
-              'Formulario Ingreso Datos Curso',
+              'Formulario Ingreso Datos Cursos',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: kMorado,
@@ -62,10 +62,11 @@ class _FormNivelesState extends State<FormNiveles> {
           child: ListView(
             padding: EdgeInsets.all(16),
             children: [
+              //Codigo Del Curso
               TextFormField(
                 cursorColor: kMorado,
                 keyboardType: TextInputType.number,
-                controller: tiaController,
+                controller: codigoController,
                 decoration: decorationInput(label1),
                 style: TextStyle(
                   fontSize: 15,
@@ -73,9 +74,10 @@ class _FormNivelesState extends State<FormNiveles> {
                 ),
               ),
               Divider(),
+              //Nombre Del Curso
               TextFormField(
                 cursorColor: kMorado,
-                controller: tiaController,
+                controller: nombreController,
                 decoration: decorationInput(label2),
                 style: TextStyle(
                   fontSize: 15,
@@ -83,10 +85,19 @@ class _FormNivelesState extends State<FormNiveles> {
                 ),
               ),
               Divider(),
+              //grado del curso
               TextFormField(
                 cursorColor: kMorado,
-                controller: tiaController,
+                controller: gradoController,
                 decoration: decorationInput(label3),
+                style: TextStyle(fontSize: 15),
+              ),
+              Divider(),
+              //Descripcion
+              TextFormField(
+                cursorColor: kMorado,
+                controller: descripcionController,
+                decoration: decorationInput(label5),
                 style: TextStyle(fontSize: 15),
               ),
               Divider(),
@@ -99,7 +110,7 @@ class _FormNivelesState extends State<FormNiveles> {
                         textStyle: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold)),
                     child: Text(
-                      'Agregar Nivel',
+                      'Agregar Curso',
                       style: TextStyle(color: kRosa),
                     ),
                     onPressed: () async {}),
@@ -116,7 +127,7 @@ class _FormNivelesState extends State<FormNiveles> {
 
   InputDecoration decorationInput(String label) {
     return InputDecoration(
-      filled: true, //<-- SEE HERE
+      filled: true,
       fillColor: kCeleste,
       labelText: label,
       enabledBorder: new OutlineInputBorder(
