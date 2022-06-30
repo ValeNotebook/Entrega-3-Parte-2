@@ -77,18 +77,15 @@ class EventoController extends Controller
      */
     public function update(Request $request, evento $evento)
     {
-
+        $evento->cod_evento = $request->cod_evento;
         $evento->nino = $request-> nino;
         $evento->tia = $request->tia;
         $evento->descripcion = $request->descripcion;
 
-        if($evento->save()){
-            return $evento;
+        $evento->save();
+        return $evento;
 
-        }else{
-            return [];
 
-        }
     }
 
 
