@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\nino;
 use Illuminate\Http\Request;
+use App\Http\Requests\NinosRequest;
 
 class NinosController extends Controller
 {
@@ -23,20 +25,20 @@ class NinosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NinosRequest $request)
     {
         $nino = new nino();
         $nino->rut_nino = $request-> rut_nino;
         $nino->nombre_nino = $request->nombre_nino;
         $nino->apellido = $request->apellido;
         $nino->genero = $request->genero;
-        if($nino->save()){
+        $nino->save();
             return $nino;
 
-        }else{
-            return [];
 
-        }
+
+
+
 
 
     }

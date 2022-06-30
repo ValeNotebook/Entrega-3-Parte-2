@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\Models\educadora;
 use Illuminate\Http\Request;
+use App\Http\Requests\EducadorasRequest;
 
 class EducadoraController extends Controller
 {
@@ -36,7 +37,7 @@ class EducadoraController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EducadorasRequest $request)
     {
         //
         $educadora = new educadora();

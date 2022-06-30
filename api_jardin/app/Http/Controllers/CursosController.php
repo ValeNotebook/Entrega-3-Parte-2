@@ -51,7 +51,7 @@ class CursosController extends Controller
      */
     public function show(curso $curso)
     {
-        //
+        return $curso;
     }
 
     /**
@@ -63,7 +63,14 @@ class CursosController extends Controller
      */
     public function update(Request $request, curso $curso)
     {
-        //
+
+        $curso->cod_curso       = $request->cod_curso;
+        $curso->nombre_curso    =$request->nombre_curso;
+        $curso->grado           =$request->grado;
+        $curso->descripcion     =$request->descripcion;
+
+        $curso->save();
+        return $curso;
     }
 
     /**
