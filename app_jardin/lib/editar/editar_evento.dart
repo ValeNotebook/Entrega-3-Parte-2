@@ -108,14 +108,13 @@ class _EditarEventosState extends State<EditarEventos> {
                       style: TextStyle(color: kRosa),
                     ),
                     onPressed: () async {
-                      //print(nombreCtrl.text.trim());
                       //print('esta pulsando');
-                      //EventosProvider().EventosEditar(
-                      //widget.nino,
-                      //rutCtrl.text.trim(),
-                      //nombreCtrl.text.trim(),
-                      //apellidoCtrl.text.trim(),
-                      //generoCtrl.text.trim());
+                      EventosProvider().eventoModificar(
+                        widget.evento,
+                        ninoCtrl.text.trim(),
+                        tiaCtrl.text.trim(),
+                        descripcionCtrl.text.trim(),
+                      );
 
                       setState(() {});
                       //return;

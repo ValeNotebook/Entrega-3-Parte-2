@@ -77,8 +77,12 @@ class _ListarAlumnosDosState extends State<ListarAlumnosDos> {
                   leading: CircleAvatar(
                     backgroundColor: kCeleste,
                     //child: ClipRRect(
-                    //child: Image.asset(' '),
-                    //borderRadius: BorderRadius.circular(50.0),
+                    child: Image(
+                      image: NetworkImage(
+                          'https://avatars.githubusercontent.com/u/109951?s=400&v=4'),
+                      height: 140,
+                    ),
+
                     //),
                   ),
                   title: Text(nino['nombre_nino'] + ' ' + nino['apellido']),

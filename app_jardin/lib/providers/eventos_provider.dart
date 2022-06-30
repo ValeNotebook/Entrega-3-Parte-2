@@ -58,6 +58,7 @@ class EventosProvider {
     return json.decode(respuesta.body);
   }
 
+//No se para que es esto pero no lo tocare por si acaso
   Future<LinkedHashMap<String, dynamic>> eventosEditar(
       int cod_evento, String nino, String tia, String descripcion) async {
     var uri = Uri.parse('$apiURL/eventos/$cod_evento');
@@ -73,6 +74,29 @@ class EventosProvider {
         'descripcion': descripcion,
       }),
     );
+    return json.decode(respuesta.body);
+  }
+
+  //modificar
+  Future<LinkedHashMap<String, dynamic>> eventoModificar(
+    int cod_evento,
+    String nino,
+    String tia,
+    String descripcion,
+  ) async {
+    var uri = Uri.parse('$apiURL/eventos/$cod_evento');
+    var respuesta = await http.put(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'cod_evento': cod_evento,
+          'nino': nino,
+          'tia': tia,
+          'descripcion': descripcion,
+        }));
+
     return json.decode(respuesta.body);
   }
 
