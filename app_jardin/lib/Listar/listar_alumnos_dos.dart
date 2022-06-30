@@ -75,13 +75,8 @@ class _ListarAlumnosDosState extends State<ListarAlumnosDos> {
                 child: ListTile(
                   //Para la imagen del ni;o
                   leading: CircleAvatar(
-                    backgroundColor: kCeleste,
+                    backgroundColor: kRosa,
                     //child: ClipRRect(
-                    child: Image(
-                      image: NetworkImage(
-                          'https://avatars.githubusercontent.com/u/109951?s=400&v=4'),
-                      height: 140,
-                    ),
 
                     //),
                   ),

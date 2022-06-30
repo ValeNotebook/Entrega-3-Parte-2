@@ -79,21 +79,21 @@ class _EditarEventosState extends State<EditarEventos> {
                     padding: EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: ninoCtrl,
-                      decoration: decorationInput('Rut'),
+                      decoration: decorationInput('Rut Alumno'),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: tiaCtrl,
-                      decoration: decorationInput('Nombre'),
+                      decoration: decorationInput('Rut Educadora'),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: descripcionCtrl,
-                      decoration: decorationInput('Apellido'),
+                      decoration: decorationInput('Descripcion'),
                     ),
                   ),
                   Divider(),
