@@ -121,7 +121,6 @@ class FormEventosState extends State<FormEventos> {
                       var res = await EventosProvider()
                           .eventosAgregar(something, tia, descripcion);
                       if (res.isEmpty) {
-                        print(res);
                         //Aqui un Snackbar
                         showSnackbar(' $descripcion No Se Ha Podido Agregar');
                       } else {

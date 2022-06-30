@@ -79,42 +79,49 @@ class _EditarEventosState extends State<EditarEventos> {
                     padding: EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: ninoCtrl,
-                      decoration: InputDecoration(
-                          labelText: 'RUT', border: OutlineInputBorder()),
+                      decoration: decorationInput('Rut'),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: tiaCtrl,
-                      decoration: InputDecoration(
-                          labelText: 'NOMBRE', border: OutlineInputBorder()),
+                      decoration: decorationInput('Nombre'),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: descripcionCtrl,
-                      decoration: InputDecoration(
-                          labelText: 'APELLIDO', border: OutlineInputBorder()),
+                      decoration: decorationInput('Apellido'),
                     ),
                   ),
+                  Divider(),
                   ElevatedButton(
-                      onPressed: () async {
-                        //print(nombreCtrl.text.trim());
-                        //print('esta pulsando');
-                        //EventosProvider().EventosEditar(
-                        //widget.nino,
-                        //rutCtrl.text.trim(),
-                        //nombreCtrl.text.trim(),
-                        //apellidoCtrl.text.trim(),
-                        //generoCtrl.text.trim());
+                    style: ElevatedButton.styleFrom(
+                        primary: kMorado,
+                        padding: EdgeInsets.all(16),
+                        textStyle: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                    child: Text(
+                      'Agregar Cambios',
+                      style: TextStyle(color: kRosa),
+                    ),
+                    onPressed: () async {
+                      //print(nombreCtrl.text.trim());
+                      //print('esta pulsando');
+                      //EventosProvider().EventosEditar(
+                      //widget.nino,
+                      //rutCtrl.text.trim(),
+                      //nombreCtrl.text.trim(),
+                      //apellidoCtrl.text.trim(),
+                      //generoCtrl.text.trim());
 
-                        setState(() {});
-                        //return;
-                        Navigator.pop(context);
-                      },
-                      child: Text('Agregar'))
+                      setState(() {});
+                      //return;
+                      Navigator.pop(context);
+                    },
+                  )
                 ],
               ),
             ),
@@ -123,4 +130,20 @@ class _EditarEventosState extends State<EditarEventos> {
       ),
     );
   }
+}
+
+InputDecoration decorationInput(String label) {
+  return InputDecoration(
+    filled: true, //<-- SEE HERE
+    fillColor: kCeleste,
+    labelText: label,
+    enabledBorder: new OutlineInputBorder(
+      borderRadius: new BorderRadius.circular(5.0),
+      borderSide: BorderSide(color: kMorado),
+    ),
+    focusedBorder: new OutlineInputBorder(
+      borderRadius: new BorderRadius.circular(5.0),
+      borderSide: BorderSide(color: kMorado),
+    ),
+  );
 }

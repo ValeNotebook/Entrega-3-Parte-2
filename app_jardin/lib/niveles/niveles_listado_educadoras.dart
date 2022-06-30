@@ -71,7 +71,7 @@ class _NiveleslistadoEducadorasState extends State<NiveleslistadoEducadoras> {
                       IconButton(
                         tooltip: 'Gestionar Educadora',
                         icon: FaIcon(
-                          FontAwesomeIcons.solidStar,
+                          FontAwesomeIcons.circleCheck,
                           color: iconName == 'red'
                               ? Color(0xffB689C0)
                               : Colors.grey,
@@ -84,10 +84,10 @@ class _NiveleslistadoEducadorasState extends State<NiveleslistadoEducadoras> {
                             print(curso);
                             print(educadora['curso']);
 
-                            String rut_nino = educadora['rut_nino'];
+                            String rut_educadora = educadora['rut_educadora'];
 
                             var res = await EducadorasProvider()
-                                .educadoraEditarCurso(rut_nino, curso);
+                                .educadoraEditarCurso(rut_educadora, curso);
 
                             setState(() {});
                             showSnackbar('Educadora Agregado');

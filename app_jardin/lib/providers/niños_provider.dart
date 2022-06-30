@@ -83,8 +83,8 @@ class NinosProvider {
       String nombre_nino,
       String apellido,
       String genero) async {
-    var uri = Uri.parse('$apiURL/ninos');
-    var respuesta = await http.post(uri,
+    var uri = Uri.parse('$apiURL/ninos/$rut_nino');
+    var respuesta = await http.put(uri,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Accept': 'application/json'

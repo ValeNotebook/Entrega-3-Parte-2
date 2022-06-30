@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
 import 'package:app_jardin/Formularios/form_niveles.dart';
+import 'package:app_jardin/editar/editar_curso.dart';
 
 import 'package:app_jardin/niveles/niveles_listado_alumnos.dart';
 import 'package:app_jardin/providers/cursos_provider.dart';
@@ -31,7 +32,7 @@ class _ListarNivelesState extends State<ListarNiveles> {
         child: AppBar(
           backgroundColor: kRosa,
           title: Text(
-            'Listado y Gestion De Niveles',
+            'Listado y Gestion De Cursos',
             style: TextStyle(fontWeight: FontWeight.bold, color: kMorado),
           ),
           actions: <Widget>[
@@ -105,7 +106,17 @@ class _ListarNivelesState extends State<ListarNiveles> {
                         tooltip: 'Editar',
                         icon: FaIcon(FontAwesomeIcons.penToSquare),
                         onPressed: () {
-                          //Aqui Va El Editar
+                          //Aqui va el editar
+                          print(nivel['cod_curso']);
+
+                          MaterialPageRoute ruta2 =
+                              MaterialPageRoute(builder: (context) {
+                            return EditarCursos(nivel['cod_curso']);
+                          });
+                          //print('llega hasta aqui');
+                          Navigator.push(context, ruta2).then((value) {
+                            setState(() {});
+                          });
                         },
                       ),
                       IconButton(

@@ -73,7 +73,7 @@ class _NivelesListadoAlumnosState extends State<NivelesListadoAlumnos> {
                       IconButton(
                         tooltip: 'Gestionar Alumno',
                         icon: FaIcon(
-                          FontAwesomeIcons.solidStar,
+                          FontAwesomeIcons.circleCheck,
                           color: iconName == 'red'
                               ? Color(0xffB689C0)
                               : Colors.grey,

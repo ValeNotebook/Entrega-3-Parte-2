@@ -78,29 +78,37 @@ class _EditarNinosState extends State<EditarNinos> {
                         padding: EdgeInsets.all(8.0),
                         child: TextFormField(
                           controller: rutCtrl,
-                          decoration: InputDecoration(
-                              labelText: 'RUT', border: OutlineInputBorder()),
+                          decoration: decorationInput('RUT'),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: TextFormField(
                           controller: nombreCtrl,
-                          decoration: InputDecoration(
-                              labelText: 'NOMBRE',
-                              border: OutlineInputBorder()),
+                          decoration: decorationInput('Nombre'),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: TextFormField(
                           controller: apellidoCtrl,
-                          decoration: InputDecoration(
-                              labelText: 'APELLIDO',
-                              border: OutlineInputBorder()),
+                          decoration: decorationInput('Apellido'),
                         ),
                       ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: generoCtrl,
+                          decoration: decorationInput('Genero'),
+                        ),
+                      ),
+                      Divider(),
                       ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: kMorado,
+                              padding: EdgeInsets.all(16),
+                              textStyle: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
                           onPressed: () async {
                             print(nombreCtrl.text.trim());
                             //print('esta pulsando');
@@ -115,11 +123,27 @@ class _EditarNinosState extends State<EditarNinos> {
                             //return;
                             Navigator.pop(context);
                           },
-                          child: Text('Agregar'))
+                          child: Text('Agregar Cambios'))
                     ],
                   ),
                 ));
           }),
     );
   }
+}
+
+InputDecoration decorationInput(String label) {
+  return InputDecoration(
+    filled: true, //<-- SEE HERE
+    fillColor: kCeleste,
+    labelText: label,
+    enabledBorder: new OutlineInputBorder(
+      borderRadius: new BorderRadius.circular(5.0),
+      borderSide: BorderSide(color: kMorado),
+    ),
+    focusedBorder: new OutlineInputBorder(
+      borderRadius: new BorderRadius.circular(5.0),
+      borderSide: BorderSide(color: kMorado),
+    ),
+  );
 }

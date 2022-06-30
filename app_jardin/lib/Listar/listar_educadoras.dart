@@ -67,13 +67,21 @@ class _ListarEducadorasState extends State<ListarEducadoras> {
             itemCount: snap.data.length,
             itemBuilder: (context, index) {
               var educadora = snap.data[index];
+              var cursoList = '';
+              if (educadora['curso'] == null) {
+                cursoList = 'Sin Asignar';
+              } else {
+                cursoList = educadora['curso'];
+              }
               return Card(
                 margin: EdgeInsets.all(10.0),
                 color: kVioleta,
                 elevation: 0,
                 child: ListTile(
-                  title: Text(educadora['nombre_tia']),
-                  subtitle: Text(educadora['rut_educadora']),
+                  title: Text(
+                      educadora['nombre_tia'] + ' ' + educadora['apellido']),
+                  subtitle: Text(
+                      educadora['rut_educadora'] + '\n' + 'Curso: $cursoList'),
                   trailing: Wrap(
                     spacing: 12,
                     children: <Widget>[

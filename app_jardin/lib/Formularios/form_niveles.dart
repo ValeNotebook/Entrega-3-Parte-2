@@ -1,3 +1,4 @@
+import 'package:app_jardin/providers/cursos_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:app_jardin/providers/niños_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,13 +22,7 @@ class _FormNivelesState extends State<FormNiveles> {
   String label1 = 'Codigo Del Curso';
   String label2 = 'Nombre Del Curso';
   String label3 = 'Grado Del Curso';
-
   String label5 = 'Descripcion';
-
-  String rutValue = '';
-  String nombreValue = '';
-  String apellidoValue = '';
-  String generoValue = '';
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +60,6 @@ class _FormNivelesState extends State<FormNiveles> {
               //Codigo Del Curso
               TextFormField(
                 cursorColor: kMorado,
-                keyboardType: TextInputType.number,
                 controller: codigoController,
                 decoration: decorationInput(label1),
                 style: TextStyle(
@@ -113,7 +107,23 @@ class _FormNivelesState extends State<FormNiveles> {
                       'Agregar Curso',
                       style: TextStyle(color: kRosa),
                     ),
-                    onPressed: () async {}),
+                    onPressed: () async {
+                      String codigo = codigoController.text.toString();
+                      String nombre = nombreController.text;
+                      var grado = gradoController.text;
+                      String descripcion = descripcionController.text;
+
+                      var res = await CursosProvider()
+                          .cursoAgregar(codigo, nombre, grado, descripcion);
+                      if (res.isEmpty) {
+                        print(res);
+                        //Aqui un Snackbar
+                        showSnackbar(' $nombre No Se Ha Podido Agregar');
+                      } else {
+                        showSnackbar(' $nombre Agregad@');
+                        Navigator.pop(context);
+                      }
+                    }),
               ),
             ],
           ),

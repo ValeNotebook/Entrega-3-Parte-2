@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app_jardin/providers/educadoras_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:app_jardin/providers/niños_provider.dart';
@@ -24,6 +26,7 @@ class _FormEducadorasState extends State<FormEducadoras> {
 
   String errCodigo = '';
   String errNombre = '';
+  String errApellido = '';
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +71,13 @@ class _FormEducadorasState extends State<FormEducadoras> {
                   color: kMorado,
                 ),
               ),
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                  errCodigo,
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
               Divider(),
               TextFormField(
                 cursorColor: kMorado,
@@ -78,12 +88,30 @@ class _FormEducadorasState extends State<FormEducadoras> {
                   color: kMorado,
                 ),
               ),
+
+              //muestra el error
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                  errNombre,
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+
               Divider(),
               TextFormField(
                 cursorColor: kMorado,
                 controller: apellidoController,
                 decoration: decorationInput(label3),
                 style: TextStyle(fontSize: 15),
+              ),
+
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                  errApellido,
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
               Divider(),
               Container(
@@ -105,10 +133,27 @@ class _FormEducadorasState extends State<FormEducadoras> {
                       //int stock = int.tryParse(stockCtrl.text) ?? 0;
                       //int precio = int.tryParse(precioCtrl.text) ?? 0;
 
-                      var res = await EducadorasProvider()
+                      var respuesta = await EducadorasProvider()
                           .educadoraAgregar(rut, nombre, apellido);
-                      if (res.isEmpty) {
-                        print(res);
+                      if (respuesta['message'] != null) {
+                        //
+                        if (respuesta['errors']['rut_educadora'] != null) {
+                          errCodigo = respuesta['errors']['rut_educadora'][0];
+                        }
+
+                        //nombre
+                        if (respuesta['errors']['nombre_tia'] != null) {
+                          errNombre = respuesta['errors']['nombre_tia'][0];
+                        }
+
+                        if (respuesta['errors']['apellido'] != null) {
+                          errApellido = respuesta['errors']['apellido'][0];
+                        }
+
+                        setState(() {});
+                        return;
+                      }
+                      if (respuesta.isEmpty) {
                         //Aqui un Snackbar
                         showSnackbar(' $nombre No Se Ha Podido Agregar');
                       } else {

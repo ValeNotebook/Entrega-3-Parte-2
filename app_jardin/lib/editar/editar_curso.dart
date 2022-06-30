@@ -1,23 +1,27 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:app_jardin/providers/cursos_provider.dart';
 import 'package:app_jardin/providers/educadoras_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:app_jardin/paleta_colores.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//import 'package:prueba_api/providers/tiasprovider.dart';
 
-class EditarTias extends StatefulWidget {
-  String tia;
-  EditarTias(this.tia, {Key? key}) : super(key: key);
+class EditarCursos extends StatefulWidget {
+  String cod;
+  EditarCursos(this.cod, {Key? key}) : super(key: key);
 
   @override
-  State<EditarTias> createState() => _EditarTiasState();
+  State<EditarCursos> createState() => _EditarCursosState();
 }
 
-class _EditarTiasState extends State<EditarTias> {
+class _EditarCursosState extends State<EditarCursos> {
   final formKey = GlobalKey<FormState>();
-  TextEditingController rutCtrl = TextEditingController();
+  TextEditingController codigoCtrl = TextEditingController();
   TextEditingController nombreCtrl = TextEditingController();
-  TextEditingController apellidoCtrl = TextEditingController();
+  TextEditingController gradoCtrl = TextEditingController();
+  TextEditingController descripcionCtrl = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -26,11 +30,12 @@ class _EditarTiasState extends State<EditarTias> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBurdeo,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: kRosa,
         title: Text(
-          'Editar Tia ${widget.tia}',
+          'Editar Curso ${widget.cod}',
           style: TextStyle(color: kMorado),
         ),
         leading: IconButton(
@@ -44,8 +49,7 @@ class _EditarTiasState extends State<EditarTias> {
         ),
       ),
       body: FutureBuilder(
-        future: EducadorasProvider().getTia(widget.tia),
-        //TiasProvider().getTia(widget.tia),
+        future: CursosProvider().getCurso(widget.cod),
         builder: (context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -55,9 +59,10 @@ class _EditarTiasState extends State<EditarTias> {
 
           var data = snapshot.data;
 
-          rutCtrl.text = data['rut_educadora'];
-          nombreCtrl.text = data['nombre_tia'];
-          apellidoCtrl.text = data['apellido'];
+          codigoCtrl.text = widget.cod;
+          nombreCtrl.text = data['nombre_curso'];
+          gradoCtrl.text = data['grado'].toString();
+          descripcionCtrl.text = data['descripcion'];
 
           return Form(
             key: formKey,
@@ -68,49 +73,42 @@ class _EditarTiasState extends State<EditarTias> {
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: TextFormField(
-                      controller: rutCtrl,
-                      decoration: decorationInput('Rut'),
+                      controller: codigoCtrl,
+                      decoration: decorationInput('Codigo'),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: nombreCtrl,
-                      decoration: decorationInput('Nombre '),
+                      decoration: decorationInput('Nombre'),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: TextFormField(
-                      controller: apellidoCtrl,
-                      decoration: decorationInput('Apellido'),
+                      controller: gradoCtrl,
+                      decoration: decorationInput('Grado'),
                     ),
                   ),
-                  Divider(),
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: kMorado,
-                        padding: EdgeInsets.all(16),
-                        textStyle: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
-                    child: Text(
-                      'Agregar Cambios',
-                      style: TextStyle(color: kRosa),
-                    ),
-                    onPressed: () async {
-                      print(nombreCtrl.text.trim());
-                      //print('esta pulsando');
-                      EducadorasProvider().tiasEditar(
-                          widget.tia,
-                          rutCtrl.text.trim(),
+                      onPressed: () async {
+                        print('on pressed');
+                        //print('esta pulsando');
+                        CursosProvider().cursosEditar(
+                          widget.cod,
+                          codigoCtrl.text.trim(),
                           nombreCtrl.text.trim(),
-                          apellidoCtrl.text.trim());
+                          gradoCtrl.text.trim(),
+                          descripcionCtrl.text.trim(),
+                        );
+                        print('ESTA ES LA RES');
 
-                      setState(() {});
-                      //return;
-                      Navigator.pop(context);
-                    },
-                  )
+                        setState(() {});
+                        //return;
+                        Navigator.pop(context);
+                      },
+                      child: Text('Agregar'))
                 ],
               ),
             ),
@@ -123,7 +121,7 @@ class _EditarTiasState extends State<EditarTias> {
 
 InputDecoration decorationInput(String label) {
   return InputDecoration(
-    filled: true, //<-- SEE HERE
+    filled: true,
     fillColor: kCeleste,
     labelText: label,
     enabledBorder: new OutlineInputBorder(
