@@ -1,13 +1,19 @@
+import 'package:app_jardin/Firebase/Login.dart';
+import 'package:app_jardin/Firebase/Login.dart';
+import 'package:app_jardin/Firebase/Registrarse.dart';
 import 'package:app_jardin/navigator.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-  
 
   // This widget is the root of your application.
   @override
@@ -26,7 +32,13 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: NavigatorBar(),
+      home: LoginForm(),
+      initialRoute: 'login',
+      routes: {
+        'login': (_) => LoginForm(),
+        'registrarse': (_) => RegistrarseForm(),
+        'nav': (_) => NavigatorBar()
+      },
     );
   }
 }

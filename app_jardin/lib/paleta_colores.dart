@@ -10,3 +10,9 @@ const kRosa = Color(0xffF2D7D9);
 const kVioleta = Color(0xffD3CEDF);
 const kCeleste = Color(0xff9DD6DF);
 const kBurdeo = Color(0xffF7ECDE);
+const kOscuro = Color(0xff0078AA);
+
+//Font
+
+const TextStyle kBodyText =
+    TextStyle(fontSize: 22, color: Colors.white, height: 1.5);

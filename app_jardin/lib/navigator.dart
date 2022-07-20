@@ -1,14 +1,17 @@
+import 'package:app_jardin/Firebase/Login.dart';
 import 'package:app_jardin/Listar/listar_alumnos.dart';
 import 'package:app_jardin/Listar/listar_alumnos_dos.dart';
 import 'package:app_jardin/Listar/listar_educadoras.dart';
 import 'package:app_jardin/Listar/listar_eventos_totales.dart';
 import 'package:app_jardin/Listar/listar_niveles.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_jardin/paleta_colores.dart';
 import 'package:app_jardin/providers/niños_provider.dart';
 import 'package:app_jardin/Formularios/form_alumnos.dart';
+import 'package:app_jardin/Firebase/User.dart';
 
 class NavigatorBar extends StatefulWidget {
   NavigatorBar({Key? key}) : super(key: key);
@@ -29,7 +32,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
     ListarEventos(),
     ListarEducadoras(),
     ListarNiveles(),
-    //ListarAlumnos(),
+    TopMenu()
 
     //Luego en el scafolld, utilizar
     //body : screens[indexs]
@@ -47,6 +50,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
       ),
       FaIcon(FontAwesomeIcons.addressBook, size: 25),
       FaIcon(FontAwesomeIcons.rainbow, size: 25),
+      FaIcon(FontAwesomeIcons.user, size: 25)
       //FaIcon(FontAwesomeIcons.user, size: 25),
     ];
 
@@ -87,3 +91,4 @@ class _NavigatorBarState extends State<NavigatorBar> {
 //Para navegar al OnPressed
 //final navigationState = navigationKey.currentState!;
 // navigationState.setPage(0);
+
